@@ -10,8 +10,10 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Document(collection="statut")
-public class Statut extends AbstractAuditingEntity implements Serializable{
+public class Statut implements Serializable{
 	
 	/**
 	 * 
@@ -26,9 +28,9 @@ public class Statut extends AbstractAuditingEntity implements Serializable{
 	private String libelleStatut;
 	
 	private boolean etat;
-
+	@JsonIgnore
 	private List<Fournisseur> fournisseurs;
-	
+	@JsonIgnore
 	private List<Client> clients;
 	
 	/*public Statut() {

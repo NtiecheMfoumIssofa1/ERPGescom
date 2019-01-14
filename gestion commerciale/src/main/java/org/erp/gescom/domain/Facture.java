@@ -12,8 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document(collection="facture")
-public class Facture extends AbstractAuditingEntity implements Serializable{
+public class Facture  implements Serializable{
 	
 	/**
 	 * 
@@ -34,14 +36,14 @@ public class Facture extends AbstractAuditingEntity implements Serializable{
 	private double montantTTC;
 	
 	private boolean etat;
-	
+	@JsonIgnore
 	private List<Etat> etatFacture;
-	
+	@JsonIgnore
 	private List<Commande>  commandes;
-	
+	@JsonIgnore
 	private Set<ModeReglement> modeReglements;
 	
-	private Agence agence;
+	//private Agence agence;
 	
 	/*public Facture() {
 		super();
@@ -104,12 +106,7 @@ public class Facture extends AbstractAuditingEntity implements Serializable{
 		this.commandes = commandes;
 	}
 	
-	public Agence getAgence() {
-		return agence;
-	}
-	public void setAgence(Agence agence) {
-		this.agence = agence;
-	}
+
 	public boolean equals(Object o){
 		if(this==o){
 			return true;

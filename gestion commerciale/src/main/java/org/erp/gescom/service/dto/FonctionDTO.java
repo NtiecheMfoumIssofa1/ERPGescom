@@ -3,13 +3,18 @@ package org.erp.gescom.service.dto;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
+import org.erp.gescom.domain.Fonction;
 import org.erp.gescom.domain.User;
+import org.springframework.data.annotation.Id;
 
 
 
 public class FonctionDTO {
-	
-	private Long idFonction;
+	@Id
+	private String idFonction;
+	@Size(max=30)
 	private String libelleFonction;
 	
 	private List<User> appUsers;
@@ -21,16 +26,16 @@ public class FonctionDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FonctionDTO(String libelleFonction) {
-		super();
-		this.libelleFonction = libelleFonction;
+	public FonctionDTO(Fonction fonction) {
+		this.idFonction= fonction.getIdFonction();
+		this.libelleFonction = fonction.getLibelleFonction();
 	}
 
-	public Long getIdFonction() {
+	public String getIdFonction() {
 		return idFonction;
 	}
 
-	public void setIdFonction(Long idFonction) {
+	public void setIdFonction(String idFonction) {
 		this.idFonction = idFonction;
 	}
 

@@ -9,6 +9,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,7 +19,7 @@ import javax.validation.constraints.Size;
 
 
 @Document(collection="commande")
-public class Commande extends AbstractAuditingEntity implements Serializable{
+public class Commande  implements Serializable{
 	/**
 	 * 
 	 */
@@ -36,13 +38,13 @@ public class Commande extends AbstractAuditingEntity implements Serializable{
 	
 	private boolean etat;
 	
-	private Client client;
-	
+	//private Client client;
+	@JsonIgnore
 	private List<Etat> etatCommandes;
-	
+	@JsonIgnore
 	private Set<LigneCommande> items;
 	
-	private Facture facture;
+	//private Facture facture;
 	
 	/*public Commande() {
 		super();
@@ -79,12 +81,7 @@ public class Commande extends AbstractAuditingEntity implements Serializable{
 		this.etat = etat;
 	}
 	
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
+	
 	public List<Etat> getEtatCommandes() {
 		return etatCommandes;
 	}
@@ -98,12 +95,7 @@ public class Commande extends AbstractAuditingEntity implements Serializable{
 	public void setItems(Set<LigneCommande> items) {
 		this.items = items;
 	}
-	public Facture getFacture() {
-		return facture;
-	}
-	public void setFacture(Facture facture) {
-		this.facture = facture;
-	}
+	
 	public boolean equals(Object o){
 		if( this == o){
 			return true;
@@ -123,7 +115,7 @@ public class Commande extends AbstractAuditingEntity implements Serializable{
 	@Override
 	public String toString() {
 		return "Commande [numero=" + numero + ", libelleCommande=" + libelleCommande + ", date=" + date + ", etat="
-				+ etat + ", client=" + client + ", etatCommandes=" + etatCommandes + "]";
+				+ etat + ", etatCommandes=" + etatCommandes + "]";
 	}
 	
 	

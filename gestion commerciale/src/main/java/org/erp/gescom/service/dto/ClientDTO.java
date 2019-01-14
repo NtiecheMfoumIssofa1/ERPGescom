@@ -3,47 +3,80 @@ package org.erp.gescom.service.dto;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import org.erp.gescom.domain.Client;
+import org.erp.gescom.domain.Commande;
 import org.erp.gescom.domain.Devis;
+import org.erp.gescom.domain.Statut;
 import org.erp.gescom.domain.TypeClient;
+import org.springframework.data.annotation.Id;
 
 
 
 
 public class ClientDTO {
-	private Long idClient;
+	
+	@Id
+	private String idClient;
+	
+	@Size(max=60)
 	private String nomComplet;
+	
+	@Size(max=30)
 	private String adrress;
+	
+	@Size(max=30)
 	private String ville;
+	
+	@Size(max=25)
 	private String boitePostale;
+	
+	@Size(max=20)
 	private String telephone;
+	
+	@Email
+	@Size(max=100)
 	private String email;
 	private boolean etat;
 	private TypeClient typeClient;
 	
-	private List<Devis> devis;
+	private List<String> devis;
+	
+	private List<String> commandes;
+	private List<String> statuts;
 	
 	private ClientDTO(){
 		
 	}
 	
-	private ClientDTO(Client c){
+	public ClientDTO(Client c){
+		this.idClient = c.getId();
 		this.nomComplet=c.getNomComplet();
 		this.adrress=c.getAdrress();
 		this.ville=c.getVille();
 		this.boitePostale=c.getBoitePostale();
 		this.telephone=c.getTelephone();
 		this.email=c.getEmail();
-		this.typeClient=c.getTypeClient();
-	
-		this.devis=c.getDevis();
+		//this.typeClient=c.getTypeClient();
+		this.devis=c.getDevis().stream()
+						.map(Devis::getNumeroDevis)
+						.collect(Collectors.toList());
+		this.commandes = c.getCommandes().stream()
+							.map(Commande::getLibelleCommande)
+							.collect(Collectors.toList());
+		this.statuts = c.getStatuts().stream()
+							.map(Statut :: getLibelleStatut)
+							.collect(Collectors.toList());
 		
 	}
-	public Long getIdClient() {
+	public String getIdClient() {
 		return idClient;
 	}
-	public void setIdClient(Long idClient) {
+	public void setIdClient(String idClient) {
 		this.idClient = idClient;
 	}
 	public String getNomComplet() {
@@ -95,11 +128,27 @@ public class ClientDTO {
 		this.typeClient = typeClient;
 	}
 
-	public List<Devis> getDevis() {
+	public List<String> getDevis() {
 		return devis;
 	}
-	public void setDevis(List<Devis> devis) {
+	public void setDevis(List<String> devis) {
 		this.devis = devis;
+	}
+
+	public List<String> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(List<String> commandes) {
+		this.commandes = commandes;
+	}
+
+	public List<String> getStatuts() {
+		return statuts;
+	}
+
+	public void setStatuts(List<String> statuts) {
+		this.statuts = statuts;
 	}
 	
 

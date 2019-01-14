@@ -3,22 +3,29 @@ package org.erp.gescom.service.dto;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.constraints.Size;
 
 import org.erp.gescom.domain.CategorieFournisseur;
-import org.erp.gescom.domain.Depense;
+import org.erp.gescom.domain.Depence;
 import org.erp.gescom.domain.Fournisseur;
+import org.springframework.data.annotation.Id;
 
 
 
 public class CategorieFournisseurDTO {
 	
+	@Id
+	private String idCategorie;
 	
-	private Long idCategorie;
+	@Size(max=50)
 	private String libelleCategorie;
+	
 	private boolean etat;
 	
-	private List<Fournisseur> fournisseurs;
-	private List<Depense> depenses;
+	private List<String> fournisseurs;
+	private List<String> depenses;
 	
 	public CategorieFournisseurDTO() {
 		super();
@@ -27,13 +34,17 @@ public class CategorieFournisseurDTO {
 	
 	public CategorieFournisseurDTO(CategorieFournisseur c){
 		this.libelleCategorie=c.getLibelleCategorie();
-		this.fournisseurs=c.getFournisseurs();
-		this.depenses=c.getDepenses();
+		this.fournisseurs=c.getFournisseurs().stream()
+							.map(Fournisseur::getNomComplet)
+							.collect(Collectors.toList());
+		this.depenses=c.getDepenses().stream()
+						.map(Depence::getLibelleDepnse)
+						.collect(Collectors.toList());
 	}
-	public Long getIdCategorie() {
+	public String getIdCategorie() {
 		return idCategorie;
 	}
-	public void setIdCategorie(Long idCategorie) {
+	public void setIdCategorie(String idCategorie) {
 		this.idCategorie = idCategorie;
 	}
 	public String getLibelleCategorie() {
@@ -48,18 +59,18 @@ public class CategorieFournisseurDTO {
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public List<Fournisseur> getFournisseurs() {
+	public List<String> getFournisseurs() {
 		return fournisseurs;
 	}
-	public void setFournisseurs(List<Fournisseur> fournisseurs) {
+	public void setFournisseurs(List<String> fournisseurs) {
 		this.fournisseurs = fournisseurs;
 	}
 
-	public List<Depense> getDepenses() {
+	public List<String> getDepenses() {
 		return depenses;
 	}
 
-	public void setDepenses(List<Depense> depenses) {
+	public void setDepenses(List<String> depenses) {
 		this.depenses = depenses;
 	}
 	

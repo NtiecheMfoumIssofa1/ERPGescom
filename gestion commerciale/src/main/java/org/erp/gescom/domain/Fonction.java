@@ -11,9 +11,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Document(collection="fonction")
-public class Fonction extends AbstractAuditingEntity implements Serializable{
+public class Fonction  implements Serializable{
 	
 	/**
 	 * 
@@ -26,7 +28,7 @@ public class Fonction extends AbstractAuditingEntity implements Serializable{
 	@NotNull
 	@Field("libelle_fonction")
 	private String libelleFonction;
-	
+	@JsonIgnore
 	private List<User> appUsers;
 	
 	private String action ="DESACTIVEE";

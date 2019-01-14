@@ -5,49 +5,63 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+
 import org.erp.gescom.domain.Article;
 import org.erp.gescom.domain.CategorieFournisseur;
 import org.erp.gescom.domain.Commande;
+import org.erp.gescom.domain.Fournisseur;
+import org.springframework.data.annotation.Id;
 
 
 
 public class FournisseurDTO {
+	@Id
+	private String idFournisseur;
 	
-	private Long idFournisseur;
+	@Size(max=60)
 	private String nomComplet;
+	
+	@Size(max=30)
 	private String ville;
+	
+	@Size(max=20)
 	private String boitePostale;
+	@Size(max=40)
 	private String adresse;
+	@Size(max=20)
 	private String telephone;
+	
+	@Email
+	@Size(max=100)
 	private String email;
 	private boolean etat;
 	
 	private List<Article> articles;
 
-	private Statut statut;
+	private StatutDTO statut;
 	
 	private CategorieFournisseur categorieFournisseur;
 	
 	private Set<Commande>commandes;
 	public FournisseurDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public FournisseurDTO(Long idFournisseur, String nomComplet, String ville, String boitePostale, String adresse,
-			String telephone, String email) {
+	public FournisseurDTO(Fournisseur fournisseur) {
 		super();
-		this.idFournisseur = idFournisseur;
-		this.nomComplet = nomComplet;
-		this.ville = ville;
-		this.boitePostale = boitePostale;
-		this.adresse = adresse;
-		this.telephone = telephone;
-		this.email = email;
+		this.idFournisseur = fournisseur.getIdFournisseur();
+		this.nomComplet = fournisseur.getNomComplet();
+		this.ville = fournisseur.getVille();
+		this.boitePostale = fournisseur.getBoitePostale();
+		this.adresse = fournisseur.getAdresse();
+		this.telephone = fournisseur.getTelephone();
+		this.email = fournisseur.getEmail();
 	}
-	public Long getIdFournisseur() {
+	public String getIdFournisseur() {
 		return idFournisseur;
 	}
-	public void setIdFournisseur(Long idFournisseur) {
+	public void setIdFournisseur(String idFournisseur) {
 		this.idFournisseur = idFournisseur;
 	}
 	public String getNomComplet() {
@@ -98,10 +112,10 @@ public class FournisseurDTO {
 	public void setArticles(List<Article> articles) {
 		this.articles = articles;
 	}
-	public Statut getStatut() {
+	public StatutDTO getStatut() {
 		return statut;
 	}
-	public void setStatut(Statut statut) {
+	public void setStatut(StatutDTO statut) {
 		this.statut = statut;
 	}
 	public CategorieFournisseur getCategorieFournisseur() {

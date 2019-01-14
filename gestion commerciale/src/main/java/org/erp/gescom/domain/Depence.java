@@ -15,7 +15,7 @@ import org.springframework.format.annotation.NumberFormat;
 
 
 @Document(collection="depenses")
-public class Depense extends AbstractAuditingEntity implements Serializable{
+public class Depence  implements Serializable{
 	
 	/**
 	 * 
@@ -44,7 +44,7 @@ public class Depense extends AbstractAuditingEntity implements Serializable{
 	
 	private boolean etat;
 
-	private CategorieFournisseur categorieFournisseur;
+	//private CategorieFournisseur categorieFournisseur;
 	
 	/*public Depense() {
 		super();
@@ -93,12 +93,7 @@ public class Depense extends AbstractAuditingEntity implements Serializable{
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public CategorieFournisseur getCategorieFournisseur() {
-		return categorieFournisseur;
-	}
-	public void setCategorieFournisseur(CategorieFournisseur categorieFournisseur) {
-		this.categorieFournisseur = categorieFournisseur;
-	}
+	
 	
 	public boolean equals(Object o){
 		if(this == o){
@@ -107,7 +102,7 @@ public class Depense extends AbstractAuditingEntity implements Serializable{
 		if(o == null || getClass() != o.getClass()){
 			return false;
 		}
-		Depense d = (Depense) o;
+		Depence d = (Depence) o;
 		return !(d.getNumeroDepense() == null || getNumeroDepense() == null) && Objects.equals(getNumeroDepense(), d.getNumeroDepense());
 	}
 	
@@ -118,8 +113,7 @@ public class Depense extends AbstractAuditingEntity implements Serializable{
 	@Override
 	public String toString() {
 		return "Depense [numero=" + numero + ", libelleDepnse=" + libelleDepnse + ", destinataire=" + destinataire
-				+ ", dateDepanse=" + dateDepanse + ", montant=" + montant + ", etat=" + etat + ", categorieFournisseur="
-				+ categorieFournisseur + "]";
+				+ ", dateDepanse=" + dateDepanse + ", montant=" + montant + ", etat=" + etat + "]";
 	}
 	
 	

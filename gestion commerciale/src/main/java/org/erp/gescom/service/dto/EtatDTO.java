@@ -4,13 +4,20 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.validation.constraints.Size;
+
 import org.erp.gescom.domain.Commande;
+import org.erp.gescom.domain.Etat;
 import org.erp.gescom.domain.Facture;
+import org.springframework.data.annotation.Id;
 
 
 public class EtatDTO {
 	
-	private Long idEtat;
+	@Id
+	private String idEtat;
+	
+	@Size(max=30)
 	private String libelleEtat;
 	private boolean etat;
 	
@@ -18,17 +25,16 @@ public class EtatDTO {
 	
 	private Set<Facture>factures; 
 	public EtatDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public EtatDTO(String libelleEtat) {
-		super();
-		this.libelleEtat = libelleEtat;
+	public EtatDTO(Etat etat) {
+		this.idEtat = etat.getIdEtat();
+		this.libelleEtat = etat.getLibelleEtat();
 	}
-	public Long getIdEtat() {
+	public String getIdEtat() {
 		return idEtat;
 	}
-	public void setIdEtat(Long idEtat) {
+	public void setIdEtat(String idEtat) {
 		this.idEtat = idEtat;
 	}
 	public String getLibelleEtat() {

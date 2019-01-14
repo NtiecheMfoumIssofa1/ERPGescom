@@ -3,6 +3,7 @@ package org.erp.gescom.config.dbmigrations;
 import com.github.mongobee.changeset.ChangeLog;
 import com.github.mongobee.changeset.ChangeSet;
 
+import org.erp.gescom.domain.Agence;
 import org.erp.gescom.domain.Authority;
 import org.erp.gescom.domain.User;
 import org.erp.gescom.security.AuthoritiesConstants;
@@ -54,7 +55,7 @@ public class InitialSetupMigration {
         anonymousUser.setPassword("$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO");
         anonymousUser.setFirstName("Anonymous");
         anonymousUser.setLastName("User");
-        anonymousUser.setEmail("anonymous@localhost");
+        anonymousUser.setEmail("anonymous@localhost.com");
         anonymousUser.setActivated(true);
         anonymousUser.setLangKey("en");
         anonymousUser.setCreatedBy(systemUser.getLogin());
@@ -67,7 +68,7 @@ public class InitialSetupMigration {
         adminUser.setPassword("$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC");
         adminUser.setFirstName("admin");
         adminUser.setLastName("Administrator");
-        adminUser.setEmail("admin@localhost");
+        adminUser.setEmail("admin@localhost.com");
         adminUser.setActivated(true);
         adminUser.setLangKey("en");
         adminUser.setCreatedBy(systemUser.getLogin());
@@ -82,7 +83,7 @@ public class InitialSetupMigration {
         userUser.setPassword("$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K");
         userUser.setFirstName("");
         userUser.setLastName("User");
-        userUser.setEmail("user@localhost");
+        userUser.setEmail("user@localhost.com");
         userUser.setActivated(true);
         userUser.setLangKey("en");
         userUser.setCreatedBy(systemUser.getLogin());
@@ -90,4 +91,6 @@ public class InitialSetupMigration {
         userUser.getAuthorities().add(userAuthority);
         mongoTemplate.save(userUser);
     }
+    
+
 }

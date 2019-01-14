@@ -14,7 +14,7 @@ import org.springframework.format.annotation.NumberFormat;
 import java.util.Objects;
 
 @Document(collection="article")
-public class Article extends AbstractAuditingEntity implements Serializable {
+public class Article  implements Serializable {
 
 	/**
 	 * 
@@ -47,15 +47,15 @@ public class Article extends AbstractAuditingEntity implements Serializable {
 	@Field("date_livraison")
 	private Instant dateLivraison = null;
 	
-	private FamilleArticle familleArticle;
+	//private FamilleArticle familleArticle;
 	
-	private Taxes taxes;
+	//private Taxes taxes;
 	
 	private boolean etat = false;
 	
-	private Fournisseur fournisseur;
+	//private Fournisseur fournisseur;
 	
-	private Stock stock;
+	//private Stock stock;
 	
 	private Instant dateMiseAjour = null;
 	
@@ -119,42 +119,21 @@ public class Article extends AbstractAuditingEntity implements Serializable {
 	public void setDateLivraison(Instant dateLivraison) {
 		this.dateLivraison = dateLivraison;
 	}
-	public FamilleArticle getFamilleArticle() {
-		return familleArticle;
-	}
-	public void setFamilleArticle(FamilleArticle familleArticle) {
-		this.familleArticle = familleArticle;
-	}
-	public Taxes getTaxes() {
-		return taxes;
-	}
-	public void setTaxes(Taxes taxes) {
-		this.taxes = taxes;
-	}
+	
 	public boolean isEtat() {
 		return etat;
 	}
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public Fournisseur getFournisseur() {
-		return fournisseur;
-	}
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
-	}
+	
 	public Instant getDateMiseAjour() {
 		return dateMiseAjour;
 	}
 	public void setDateMiseAjour(Instant dateMiseAjour) {
 		this.dateMiseAjour = dateMiseAjour;
 	}
-	public Stock getStock() {
-		return stock;
-	}
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
+
 
 	public String getImage() {
 		return image;
@@ -176,14 +155,13 @@ public class Article extends AbstractAuditingEntity implements Serializable {
 	    public int hashCode() {
 	        return Objects.hashCode(getRefArticle());
 	    }
-	
 	@Override
 	public String toString() {
-		return "Article [refArticle=" + ref + ", designation=" + designation + ", prixUnitaire=" + prixUnitaire
-				+ ", tva=" + tva + ", quantiteArticle=" + quantiteArticle + ", quantiteSeuil=" + quantiteSeuil
-				+ ", dateLivraison=" + dateLivraison + ", familleArticle=" + familleArticle + ", taxes=" + taxes
-				+ ", etat=" + etat + ", fournisseur=" + fournisseur + ", stock=" + stock + ", dateMiseAjour="
-				+ dateMiseAjour +  "]";
+		return "Article [ref=" + ref + ", designation=" + designation + ", prixUnitaire=" + prixUnitaire + ", tva="
+				+ tva + ", quantiteArticle=" + quantiteArticle + ", quantiteSeuil=" + quantiteSeuil + ", dateLivraison="
+				+ dateLivraison + ", etat=" + etat + ", dateMiseAjour=" + dateMiseAjour + ", image=" + image + "]";
 	}
+	
+
 	
 }

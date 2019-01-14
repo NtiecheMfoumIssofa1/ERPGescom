@@ -12,8 +12,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Document(collection="stock")
-public abstract class Stock extends AbstractAuditingEntity implements Serializable{
+public abstract class Stock  implements Serializable{
 	
 	/**
 	 * 
@@ -30,7 +32,7 @@ public abstract class Stock extends AbstractAuditingEntity implements Serializab
 	@NumberFormat
 	@Field("quantite_stock")
 	private int quantiteStock;
-	
+	@JsonIgnore
 	private List<Article> articles;
 	
 	private boolean etat;

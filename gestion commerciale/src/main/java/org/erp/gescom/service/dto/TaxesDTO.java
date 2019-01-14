@@ -5,23 +5,26 @@ import java.util.Collection;
 import java.util.List;
 
 import org.erp.gescom.domain.Article;
+import org.erp.gescom.domain.Taxes;
+import org.springframework.data.annotation.Id;
 public class TaxesDTO {
-	private Long idTaxe;
+	@Id
+	private String idTaxe;
 	private double tauxtaxe;
 	private List<Article> articles;
 	private boolean etat;
+	
 	public TaxesDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public TaxesDTO(double tauxtaxe) {
-		super();
-		this.tauxtaxe = tauxtaxe;
+	public TaxesDTO(Taxes taxes) {
+		this.idTaxe = taxes.getIdTaxe();
+		this.tauxtaxe = taxes.getTauxtaxe();
 	}
-	public Long getIdTaxe() {
+	public String getIdTaxe() {
 		return idTaxe;
 	}
-	public void setIdTaxe(Long idTaxe) {
+	public void setIdTaxe(String idTaxe) {
 		this.idTaxe = idTaxe;
 	}
 	public double getTauxtaxe() {
@@ -35,6 +38,12 @@ public class TaxesDTO {
 	}
 	public void setEtat(boolean etat) {
 		this.etat = etat;
+	}
+	public List<Article> getArticles() {
+		return articles;
+	}
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
 	}
 	
 	

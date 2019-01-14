@@ -6,22 +6,40 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
 import org.erp.gescom.domain.Article;
 import org.erp.gescom.domain.FamilleArticle;
 import org.erp.gescom.domain.Fournisseur;
 import org.erp.gescom.domain.Stock;
 import org.erp.gescom.domain.Taxes;
+import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.NumberFormat;
 
 
 public class ArticleDTO {
-
+	
+	@Id
 	private String ref;
+	
+	@Size(max=100)
 	private String designation;
+	
+	@NumberFormat
 	private double prixUnitaire;
+	
+	@NumberFormat
 	private double tva;
+	
+	@NumberFormat
 	private int quantite;
+	
+	@NumberFormat
 	private  int quantiteSeuil;
-	private Instant dateLivraison;
+	
+	private String image;
+	
+	private Instant dateLivraison = null;
 	
 	private FamilleArticle familleArticle;
 	
@@ -37,8 +55,7 @@ public class ArticleDTO {
 
   
 	public ArticleDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	public ArticleDTO(Article a){
 		this.ref=a.getRefArticle();
@@ -48,10 +65,10 @@ public class ArticleDTO {
 		this.tva=a.getTva();
 		this.quantiteSeuil=a.getQuantiteSeuil();
 		this.dateLivraison=a.getDateLivraison();
-		this.familleArticle=a.getFamilleArticle();
-		this.taxes=a.getTaxes();
-		this.fournisseur=a.getFournisseur();
-		this.stock=a.getStock();
+		//this.familleArticle=a.getFamilleArticle();
+		//this.taxes=a.getTaxes();
+		//this.fournisseur=a.getFournisseur();
+		//this.stock=a.getStock();
 		
 	}
 	public String getRefArticle() {
@@ -133,6 +150,12 @@ public class ArticleDTO {
 		this.stock = stock;
 	}
 	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	@Override
 	public String toString() {
 		return "ArticleDTO [ref=" + ref + ", designation=" + designation + ", prixUnitaire=" + prixUnitaire + ", tva="

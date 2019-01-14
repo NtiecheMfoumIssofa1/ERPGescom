@@ -10,11 +10,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 
 @Document(collection="categorie_fournisseur")
-public class CategorieFournisseur extends AbstractAuditingEntity implements Serializable{
+public class CategorieFournisseur  implements Serializable{
 	
 	
 	/**
@@ -30,10 +32,10 @@ public class CategorieFournisseur extends AbstractAuditingEntity implements Seri
 	private String libelle;
 	
 	private boolean etat;
-	
+	@JsonIgnore
 	private List<Fournisseur> fournisseurs;
-	
-	private List<Depense> depenses;
+	@JsonIgnore
+	private List<Depence> depenses;
 	
 /*	public CategorieFournisseur() {
 		super();
@@ -67,10 +69,10 @@ public class CategorieFournisseur extends AbstractAuditingEntity implements Seri
 	public void setFournisseurs(List<Fournisseur> fournisseurs) {
 		this.fournisseurs = fournisseurs;
 	}
-	public List<Depense> getDepenses() {
+	public List<Depence> getDepenses() {
 		return depenses;
 	}
-	public void setDepenses(List<Depense> depenses) {
+	public void setDepenses(List<Depence> depenses) {
 		this.depenses = depenses;
 	}
 	

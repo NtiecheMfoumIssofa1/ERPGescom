@@ -15,9 +15,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Document(collection="fournisseur")
-public class Fournisseur extends AbstractAuditingEntity implements Serializable{
+public class Fournisseur  implements Serializable{
 	
 	/**
 	 * 
@@ -54,13 +56,13 @@ public class Fournisseur extends AbstractAuditingEntity implements Serializable{
 	private String email;
 	
 	private boolean etat;
-	
+	@JsonIgnore
 	private List<Article> articles;
 
-	private Statut statut;
+	//private Statut statut;
 	
-	private CategorieFournisseur categorieFournisseur;
-	
+	//private CategorieFournisseur categorieFournisseur;
+	@JsonIgnore
 	private Set<Commande>commandes;
 	
 	/*public Fournisseur() {
@@ -132,18 +134,9 @@ public class Fournisseur extends AbstractAuditingEntity implements Serializable{
 	public void setArticles(List<Article> articles) {
 		this.articles = articles;
 	}
-	public Statut getStatut() {
-		return statut;
-	}
-	public void setStatut(Statut statut) {
-		this.statut = statut;
-	}
-	public CategorieFournisseur getCategorieFournisseur() {
-		return categorieFournisseur;
-	}
-	public void setCategorieFournisseur(CategorieFournisseur categorieFournisseur) {
-		this.categorieFournisseur = categorieFournisseur;
-	}
+	
+	
+	
 	public Set<Commande> getCommandes() {
 		return commandes;
 	}
@@ -170,8 +163,7 @@ public class Fournisseur extends AbstractAuditingEntity implements Serializable{
 	public String toString() {
 		return "Fournisseur [idFournisseur=" + idFournisseur + ", nomComplet=" + nomComplet + ", ville=" + ville
 				+ ", boitePostale=" + boitePostale + ", adresse=" + adresse + ", telephone=" + telephone + ", email="
-				+ email + ", etat=" + etat + ", articles=" + articles + ", statut=" + statut + ", categorieFournisseur="
-				+ categorieFournisseur + ", commandes=" + commandes + "]";
+				+ email + ", etat=" + etat + ", articles=" + articles + ", commandes=" + commandes + "]";
 	}
 	
 	

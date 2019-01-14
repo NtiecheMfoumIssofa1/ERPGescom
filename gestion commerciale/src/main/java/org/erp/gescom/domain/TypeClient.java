@@ -11,8 +11,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document(collection="type_client")
-public class TypeClient extends AbstractAuditingEntity implements Serializable{
+public class TypeClient  implements Serializable{
 	/**
 	 * 
 	 */
@@ -24,7 +26,7 @@ public class TypeClient extends AbstractAuditingEntity implements Serializable{
 	@NotNull
 	@Field("libelle_type")
 	private String libelleType;
-	
+	@JsonIgnore
 	private List<Client> clients;
 	
 	private boolean etat;

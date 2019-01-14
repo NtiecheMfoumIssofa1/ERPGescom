@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
 
-public class LigneCommande  extends AbstractAuditingEntity implements Serializable{
+public class LigneCommande implements Serializable{
 
 	/**
 	 * 
@@ -29,9 +29,9 @@ public class LigneCommande  extends AbstractAuditingEntity implements Serializab
 	@NumberFormat
 	private Double prixUnitaire;
 	
-	private  Article article;
+	//private  Article article;
 	
-	private Commande commande;
+	//private Commande commande;
 
 	public String getId() {
 		return id;
@@ -57,21 +57,7 @@ public class LigneCommande  extends AbstractAuditingEntity implements Serializab
 		this.prixUnitaire = prixUnitaire;
 	}
 
-	public Article getArticle() {
-		return article;
-	}
-
-	public void setArticle(Article article) {
-		this.article = article;
-	}
-
-	public Commande getCommande() {
-		return commande;
-	}
-
-	public void setCommande(Commande commande) {
-		this.commande = commande;
-	}
+	
 	
 	public boolean equals(Object o){
 		if( this == o){
@@ -92,8 +78,7 @@ public class LigneCommande  extends AbstractAuditingEntity implements Serializab
 
 	@Override
 	public String toString() {
-		return "LigneCommande [id=" + id + ", quantite=" + quantite + ", prixUnitaire=" + prixUnitaire + ", article="
-				+ article + ", commande=" + commande + "]";
+		return "LigneCommande [id=" + id + ", quantite=" + quantite + ", prixUnitaire=" + prixUnitaire + "]";
 	}
 	
 

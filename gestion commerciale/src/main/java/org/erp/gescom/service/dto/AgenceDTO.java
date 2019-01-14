@@ -1,21 +1,23 @@
-package org.erp.gescom.domain;
+package org.erp.gescom.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.erp.gescom.domain.Agence;
+import org.erp.gescom.domain.Facture;
+import org.erp.gescom.domain.Ville;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Document(collection="agence")
-public class Agence  implements Serializable{
+public class AgenceDTO  implements Serializable{
 
 	/**
 	 * 
@@ -25,30 +27,45 @@ public class Agence  implements Serializable{
 	@Id
 	private String id;
 	
-	@NotNull
-	@Field("description")
+	
 	@Size(min = 10, max=50)
 	private String description;
 	
-	@NotNull
-	@Field("address")
+	
 	@Size( max=30)
 	private String address;
 	
-	@NotNull
-	@Field("telephone")
+	
 	@Size( max=50)
 	private String telephone;
 	
 	@Email
-	@Field("email")
 	@NotNull
 	private String email;
 	
-	@JsonIgnore
-	private Set<Facture > factures;
+	private Set<String > factures;
 	
-	//private Ville ville;
+	private Ville ville;
+
+	
+	
+	public AgenceDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public AgenceDTO(Agence agence) {
+	
+		this.id = agence.getId();
+		this.description = agence.getDescription();
+		this.address = agence.getAddress();
+		this.telephone = agence.getTelephone();
+		this.email = agence.getEmail();				
+		//this.ville = agence.getVille();
+		this.factures = agence.getFactures().stream()
+				.map(Facture::getIdFacture)
+				.collect(Collectors.toSet());
+	}
 
 	public String getId() {
 		return id;
@@ -90,37 +107,20 @@ public class Agence  implements Serializable{
 		this.email = email;
 	}
 
-	public Set<Facture> getFactures() {
+	public Set<String> getFactures() {
 		return factures;
 	}
 
-	public void setFactures(Set<Facture> factures) {
+	public void setFactures(Set<String> factures) {
 		this.factures = factures;
 	}
 	
-
-
-	public boolean equals(Object o){
-		if(this==o){
-			return true;
-		}
-		if( o == null || getClass() != o.getClass()){
-			return false;
-		}
-		
-		Agence a = (Agence) o;
-		return !(a.getId() == null || getId() == null) && Objects.equals(getId(),a.getId());
+	public Ville getVille() {
+		return ville;
 	}
-	@Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
 
-	@Override
-	public String toString() {
-		return "Agence [id=" + id + ", description=" + description + ", address=" + address + ", telephone=" + telephone
-				+ ", email=" + email + ", factures=" + factures + "]";
+	public void setVille(Ville ville) {
+		this.ville = ville;
 	}
-	
 
 }

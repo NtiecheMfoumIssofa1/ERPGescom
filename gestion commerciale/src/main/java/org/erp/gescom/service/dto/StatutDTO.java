@@ -4,27 +4,36 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-import org.erp.gescom.domain.Fournisseur;
+import javax.validation.constraints.Size;
 
-public class Statut {
+import org.erp.gescom.domain.Fournisseur;
+import org.erp.gescom.domain.Statut;
+import org.springframework.data.annotation.Id;
+
+public class StatutDTO {
+	@Id
+	private String idStatut;
 	
-	private Long idStatut;
+	@Size(max=40)
 	private String libelleStatut;
 	private boolean etat;
 
 	private List<Fournisseur> fournisseurs;
-	public Statut() {
-		super();
-		// TODO Auto-generated constructor stub
+	
+	
+	public StatutDTO() {
+		
 	}
-	public Statut(String libelleStatut) {
+	public StatutDTO(Statut statut) {
 		super();
-		this.libelleStatut = libelleStatut;
+		this.idStatut = statut.getIdStatut();
+		this.libelleStatut = statut.getLibelleStatut();
+		this.fournisseurs = statut.getFournisseurs();
 	}
-	public Long getIdStatut() {
+	public String getIdStatut() {
 		return idStatut;
 	}
-	public void setIdStatut(Long idStatut) {
+	public void setIdStatut(String idStatut) {
 		this.idStatut = idStatut;
 	}
 	public String getLibelleStatut() {

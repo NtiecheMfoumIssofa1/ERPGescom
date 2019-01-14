@@ -1,4 +1,4 @@
-package org.erp.gescom.domain;
+package org.erp.gescom.service.dto;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,9 +11,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-@Document(collection="ville")
-public class Ville  implements Serializable{
+public class VilleDTO  implements Serializable{
 
 	/**
 	 * 
@@ -23,12 +21,10 @@ public class Ville  implements Serializable{
 	@Id
 	private String id;
 	
-	@NotNull
-	@Field("libelle")
 	@Size(max=30)
 	private String libelle;
-	@JsonIgnore
-	private List<Agence> agences ;
+	
+	private List<AgenceDTO> agences;
 
 	public String getId() {
 		return id;
@@ -46,11 +42,11 @@ public class Ville  implements Serializable{
 		this.libelle = libelle;
 	}
 
-	public List<Agence> getAgences() {
+	public List<AgenceDTO> getAgences() {
 		return agences;
 	}
 
-	public void setAgences(List<Agence> agences) {
+	public void setAgences(List<AgenceDTO> agences) {
 		this.agences = agences;
 	}
 	
@@ -62,7 +58,7 @@ public class Ville  implements Serializable{
 			return false;
 		}
 		
-		Ville v = (Ville) o;
+		VilleDTO v = (VilleDTO) o;
 		return !(v.getId() == null || getId() == null) && Objects.equals(getId(),v.getId());
 	}
 	@Override

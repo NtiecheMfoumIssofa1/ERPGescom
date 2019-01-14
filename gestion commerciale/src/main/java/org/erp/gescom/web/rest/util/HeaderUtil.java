@@ -11,7 +11,7 @@ public final class HeaderUtil {
 
     private static final Logger log = LoggerFactory.getLogger(HeaderUtil.class);
 
-    private static final String APPLICATION_NAME = "jhipsterMongodbSampleApplicationApp";
+    private static final String APPLICATION_NAME = "ERPGescom";
 
     private HeaderUtil() {
     }

@@ -7,8 +7,10 @@ import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Document(collection="mode_reglement")
-public class ModeReglement extends AbstractAuditingEntity implements Serializable{
+public class ModeReglement  implements Serializable{
 
 	/**
 	 * 
@@ -19,7 +21,7 @@ public class ModeReglement extends AbstractAuditingEntity implements Serializabl
 	private String libelleReglement;
 	
 	private boolean etat;
-	
+	@JsonIgnore
 	private List<Facture>factures;
 	
 	/*public ModeReglement() {

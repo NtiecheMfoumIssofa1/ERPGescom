@@ -5,12 +5,19 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 import org.erp.gescom.domain.Client;
+import org.erp.gescom.domain.Devis;
+import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.NumberFormat;
 
 
 public class DevisDTO {
-	private Long numeroDevis;
+	
+	@Id
+	private String numeroDevis;
 	private Instant dateDebutDebit;
 	private Instant dateEcheanceDevis;
+	@NumberFormat
+	
 	private int nombre;
 	private boolean etat;
 	
@@ -20,19 +27,18 @@ public class DevisDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DevisDTO(Long numeroDevis, Instant dateDebutDebit, Instant dateEcheanceDevis, int nombre,
-			double montantTTC) {
-		super();
-		this.numeroDevis = numeroDevis;
-		this.dateDebutDebit = dateDebutDebit;
-		this.dateEcheanceDevis = dateEcheanceDevis;
-		this.nombre = nombre;
-		this.montantTTC = montantTTC;
+	public DevisDTO(Devis devis) {
+		
+		this.numeroDevis = devis.getNumeroDevis();
+		this.dateDebutDebit = devis.getDateDebutDebit();
+		this.dateEcheanceDevis = devis.getDateEcheanceDevis();
+		this.nombre = devis.getNombre();
+		this.montantTTC = devis.getMontantTTC();
 	}
-	public Long getNumeroDevis() {
+	public String getNumeroDevis() {
 		return numeroDevis;
 	}
-	public void setNumeroDevis(Long numeroDevis) {
+	public void setNumeroDevis(String numeroDevis) {
 		this.numeroDevis = numeroDevis;
 	}
 	public Instant getDateDebutDebit() {

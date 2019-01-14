@@ -10,8 +10,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document(collection="taxes")
-public class Taxes extends AbstractAuditingEntity implements Serializable{
+public class Taxes  implements Serializable{
 	
 	/**
 	 * 
@@ -24,7 +26,7 @@ public class Taxes extends AbstractAuditingEntity implements Serializable{
 	@NumberFormat
 	@Field("taux_tva")
 	private double tauxtaxe;
-	
+	@JsonIgnore
 	private List<Article> articles;
 	
 	private boolean etat;

@@ -8,15 +8,19 @@ import java.util.List;
 import java.util.Set;
 
 import org.erp.gescom.domain.Etat;
+import org.erp.gescom.domain.Facture;
 import org.erp.gescom.domain.ModeReglement;
+import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.NumberFormat;
 
 
 
 public class FactureDTO {
-	
+	@Id
 	private String idFacture;
 	private Instant dateDebutFacture;
 	private Instant dateEcheanceFacture;
+	@NumberFormat
 	private double montantTTC;
 	private boolean etat;
 	
@@ -29,12 +33,12 @@ public class FactureDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public FactureDTO(String idFacture, Instant dateDebutFacture, Instant dateEcheanceFacture, double montantTTC) {
+	public FactureDTO(Facture facture) {
 		super();
-		this.idFacture = idFacture;
-		this.dateDebutFacture = dateDebutFacture;
-		this.dateEcheanceFacture = dateEcheanceFacture;
-		this.montantTTC = montantTTC;
+		this.idFacture = facture.getIdFacture();
+		this.dateDebutFacture = facture.getDateDebutFacture();
+		this.dateEcheanceFacture = facture.getDateEcheanceFacture();
+		this.montantTTC = facture.getMontantTTC();
 	}
 	public String getIdFacture() {
 		return idFacture;

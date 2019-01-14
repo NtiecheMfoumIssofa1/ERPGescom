@@ -4,18 +4,31 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 
+import javax.validation.constraints.Size;
+
 import org.erp.gescom.domain.CategorieFournisseur;
-import org.erp.gescom.domain.Depense;
+import org.erp.gescom.domain.Depence;
+import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.NumberFormat;
 
 
 
 public class DepenseDTO {
 	
-	private Long numeroDepense;
+	@Id
+	private String numeroDepense;
+	
+	@Size(max=30)
 	private String libelleDepnse;
+	
+	@Size(max=25)
 	private String destinataire;
+	
 	private Instant dateDepense;
+	
+	@NumberFormat
 	private double montant;
+	
 	private boolean etat;
 
 	private CategorieFournisseur categorieFournisseur;
@@ -23,18 +36,18 @@ public class DepenseDTO {
 	public DepenseDTO(){
 		
 	}
-	public DepenseDTO(Depense d){
+	public DepenseDTO(Depence d){
 		this.libelleDepnse=d.getLibelleDepnse();
 		this.destinataire=d.getDestinataire();
 		this.dateDepense=d.getDateDepanse();
 		this.montant=d.getMontant();
-		this.categorieFournisseur=d.getCategorieFournisseur();
+		//this.categorieFournisseur=d.getCategorieFournisseur();
 		
 	}
-	public Long getNumeroDepense() {
+	public String getNumeroDepense() {
 		return numeroDepense;
 	}
-	public void setNumeroDepense(Long numeroDepense) {
+	public void setNumeroDepense(String numeroDepense) {
 		this.numeroDepense = numeroDepense;
 	}
 	public String getLibelleDepnse() {

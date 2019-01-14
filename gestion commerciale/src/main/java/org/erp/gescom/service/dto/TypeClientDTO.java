@@ -4,10 +4,18 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
 import org.erp.gescom.domain.Client;
+import org.erp.gescom.domain.TypeClient;
+import org.springframework.data.annotation.Id;
 
 public class TypeClientDTO {
+	
+	@Id
 	private Long idType;
+	
+	@Size(max=50)
 	private String libelleType;
 	private List<Client> clients;
 	private boolean etat;
@@ -15,10 +23,9 @@ public class TypeClientDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public TypeClientDTO(String libelleType, boolean etat) {
-		super();
-		this.libelleType = libelleType;
-		this.etat = etat;
+	public TypeClientDTO(TypeClient typeClient) {
+	
+		this.libelleType = typeClient.getLibelleType();
 	}
 	public Long getIdType() {
 		return idType;

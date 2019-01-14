@@ -6,27 +6,35 @@ import java.time.format.SignStyle;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
 import org.erp.gescom.domain.Article;
+import org.erp.gescom.domain.Stock;
+import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.NumberFormat;
 
 public abstract class StockDTO {
-	private Long refStock;
+	
+	@Id
+	private String refStock;
+	@Size(max=50)
 	private String designationStock;
+	@NumberFormat
 	private int quantiteStock;
 	private List<Article> articles;
 	private boolean etat;
 	public StockDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public StockDTO(String designationStock, int quantiteStock) {
-		super();
-		this.designationStock = designationStock;
-		this.quantiteStock = quantiteStock;
+	public StockDTO(Stock stock) {
+		this.refStock = stock.getRefStock();
+		this.designationStock = stock.getDesignationStock();
+		this.quantiteStock = stock.getQuantiteStock();
 	}
-	public Long getRefStock() {
+	public String getRefStock() {
 		return refStock;
 	}
-	public void setRefStock(Long refStock) {
+	public void setRefStock(String refStock) {
 		this.refStock = refStock;
 	}
 	public String getDesignationStock() {

@@ -12,11 +12,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 
 
-public class Client extends AbstractAuditingEntity implements Serializable{
+public class Client  implements Serializable{
 	
 	/**
 	 * 
@@ -55,12 +57,12 @@ public class Client extends AbstractAuditingEntity implements Serializable{
 	
 	private boolean etat;
 	
-	private TypeClient typeClient;
-	
+	//private TypeClient typeClient;
+	@JsonIgnore
 	private List<Commande> commandes;
-	
+	@JsonIgnore
 	private List<Devis> devis;
-	
+	@JsonIgnore
 	private List<Statut> statuts;
 	
 	/*public Client() {
@@ -120,12 +122,7 @@ public class Client extends AbstractAuditingEntity implements Serializable{
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public TypeClient getTypeClient() {
-		return typeClient;
-	}
-	public void setTypeClient(TypeClient typeClient) {
-		this.typeClient = typeClient;
-	}
+	
 	
 	public String getId() {
 		return id;
@@ -171,7 +168,7 @@ public class Client extends AbstractAuditingEntity implements Serializable{
 	public String toString() {
 		return "Client [id=" + id + ", nomComplet=" + nomComplet + ", adrress=" + adrress + ", ville=" + ville
 				+ ", boitePostale=" + boitePostale + ", telephone=" + telephone + ", email=" + email + ", etat=" + etat
-				+ ", typeClient=" + typeClient + ", commande=" + commandes + ", devis=" + devis + ", statut=" + statuts + "]";
+				+ ", commande=" + commandes + ", devis=" + devis + ", statut=" + statuts + "]";
 	}
 	
 	

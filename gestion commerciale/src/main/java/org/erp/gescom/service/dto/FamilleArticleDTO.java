@@ -4,30 +4,35 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
 import org.erp.gescom.domain.Article;
+import org.erp.gescom.domain.FamilleArticle;
+import org.springframework.data.annotation.Id;
 
 
 
 
 public class FamilleArticleDTO {
+	@Id
+	private String idFamille;
 	
-	private Long idFamille;
+	@Size(max=30)
 	private String libelleFamille;
 	private boolean etat;  
 	
 	private List<Article> articles;
 	public FamilleArticleDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public FamilleArticleDTO(String libelleFamille) {
-		super();
-		this.libelleFamille = libelleFamille;
+	public FamilleArticleDTO(FamilleArticle familleArticle) {
+		this.idFamille = familleArticle.getIdFamille();
+		this.libelleFamille = familleArticle.getLibelleFamille();
 	}
-	public Long getIdFamille() {
+	public String getIdFamille() {
 		return idFamille;
 	}
-	public void setIdFamille(Long idFamille) {
+	public void setIdFamille(String idFamille) {
 		this.idFamille = idFamille;
 	}
 	public String getLibelleFamille() {

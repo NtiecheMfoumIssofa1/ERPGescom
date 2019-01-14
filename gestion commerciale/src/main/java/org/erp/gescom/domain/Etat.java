@@ -12,8 +12,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document(collection="etat")
-public class Etat extends AbstractAuditingEntity implements Serializable{
+public class Etat  implements Serializable{
 	/**
 	 * 
 	 */
@@ -28,9 +30,9 @@ public class Etat extends AbstractAuditingEntity implements Serializable{
 	private String libelleEtat;
 	
 	private boolean etat;
-	
+	@JsonIgnore
 	private Set<Commande>commandes;
-	
+	@JsonIgnore
 	private Set<Facture>factures; 
 	
 	public Etat() {

@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
 
 @Document(collection="devis")
-public class Devis extends AbstractAuditingEntity implements Serializable{
+public class Devis  implements Serializable{
 	/**
 	 * 
 	 */

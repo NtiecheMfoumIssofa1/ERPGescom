@@ -11,10 +11,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Document(collection="famille_article")
-public class FamilleArticle extends AbstractAuditingEntity implements Serializable{
+public class FamilleArticle  implements Serializable{
 	
 	/**
 	 * 
@@ -29,7 +31,7 @@ public class FamilleArticle extends AbstractAuditingEntity implements Serializab
 	private String libelleFamille;
 	
 	private boolean etat;  
-	
+	@JsonIgnore
 	private List<Article> articles;
 	
 	/*public FamilleArticle() {

@@ -12,6 +12,6 @@ public interface ClientRepository extends MongoRepository<Client, String>{
 	
 	public Page<Client> findAll(Pageable pageable);
 	
-	public Optional<Client> findOneByIdClient(String idClient);
+	public Optional<Client> findOneById(String id);
 
 }

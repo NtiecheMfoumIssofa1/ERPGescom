@@ -145,7 +145,7 @@ public class ClientService {
 	
 	//getById
 	public Optional<Client> getById(String id){
-		return clientRepository.findOneByIdClient(id);
+		return clientRepository.findOneById(id);
 	}
 	
 	//getAllByKeyWord

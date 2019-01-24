@@ -28,7 +28,7 @@ public class Fournisseur  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String idFournisseur;
+	private String id;
 	
 	@NotNull
 	@Size(max=60)
@@ -65,10 +65,10 @@ public class Fournisseur  implements Serializable{
 	
 	
 	public String getIdFournisseur() {
-		return idFournisseur;
+		return id;
 	}
 	public void setIdFournisseur(String idFournisseur) {
-		this.idFournisseur = idFournisseur;
+		this.id = idFournisseur;
 	}
 	public String getNomComplet() {
 		return nomComplet;
@@ -146,7 +146,7 @@ public class Fournisseur  implements Serializable{
     }
 	@Override
 	public String toString() {
-		return "Fournisseur [idFournisseur=" + idFournisseur + ", nomComplet=" + nomComplet + ", ville=" + ville
+		return "Fournisseur [idFournisseur=" + id + ", nomComplet=" + nomComplet + ", ville=" + ville
 				+ ", boitePostale=" + boitePostale + ", adresse=" + adresse + ", telephone=" + telephone + ", email="
 				+ email + ", etat=" + etat + ", articles=" + articles + "]";
 	}

@@ -92,11 +92,11 @@ public class FournisseurService {
 	public List<Fournisseur> getAllFournisseur(){
 		return fournisseurRepository.findAll();
 	}
-	public Optional<Object> getById(String id){
-		return fournisseurRepository.findById(id).map(FournisseurDTO::new);
+	public Optional<Fournisseur> getById(String id){
+		return fournisseurRepository.findOneById(id);
 	} 
-	public Page<Fournisseur> getAllByMc(String mc, Pageable pageable){
-		return null;
+	public Page<FournisseurDTO> getAllByMc( Pageable pageable){
+		return fournisseurRepository.findAll(pageable).map(FournisseurDTO::new);
 	}
 	
 

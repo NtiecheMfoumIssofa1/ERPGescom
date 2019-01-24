@@ -133,11 +133,11 @@ public class FactureService {
 	public List<Facture> getAllFacture(){
 		return factureRepository.findAll();
 	}
-	public Optional<Object> getById(String id){
-		return factureRepository.findById(id).map(FactureDTO::new);
+	public Optional<Facture> getById(String id){
+		return factureRepository.findOneById(id);
 	}
-	public Page<Facture> getAllByMc(String mc, Pageable pageable){
-		return null;
+	public Page<FactureDTO> getAllByMc(Pageable pageable){
+		return factureRepository.findAll(pageable).map(FactureDTO::new);
 	}
 
 }

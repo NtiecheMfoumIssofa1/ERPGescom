@@ -11,6 +11,7 @@ import org.erp.gescom.repository.FamilleAricleRepository;
 import org.erp.gescom.service.dto.FamilleArticleDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +66,6 @@ public class FamilleArticleService {
 																	.filter(Optional::isPresent)
 																	.map(Optional::get)
 																	.forEach(articles::add);
-								familleArticle.setArticles(articles);
 								familleAricleRepository.save(familleArticle);
 								return familleArticle;
 							}).map(FamilleArticleDTO::new);
@@ -82,12 +82,12 @@ public class FamilleArticleService {
 		return familleAricleRepository.findAll();
 	}
 	
-	public Optional<Object> getById(String id){
-		return familleAricleRepository.findById(id).map(FamilleArticleDTO::new);
+	public Optional<FamilleArticle> getById(String id){
+		return familleAricleRepository.findOneById(id);
 	}
 	
-	public Optional<FamilleArticle> getAllByMc(String mc, Pageable pageable){
-		return null;
+	public Page<FamilleArticleDTO> getAllByMc( Pageable pageable){
+		return familleAricleRepository.findAll(pageable).map(FamilleArticleDTO::new);
 	}
 
 }

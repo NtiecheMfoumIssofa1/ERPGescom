@@ -33,7 +33,7 @@ public class EtatDTO {
 	private Set<String>commandes;
 	@JsonIgnore
 	@DBRef
-	private Set<Facture>factures;
+	private Set<String>factures;
 	public EtatDTO() {
 		
 	}
@@ -65,10 +65,10 @@ public class EtatDTO {
 	public void setCommandes(Set<String> commandes) {
 		this.commandes = commandes;
 	}
-	public Set<Facture> getFactures() {
+	public Set<String> getFactures() {
 		return factures;
 	}
-	public void setFactures(Set<Facture> factures) {
+	public void setFactures(Set<String> factures) {
 		this.factures = factures;
 	}
 	

@@ -81,12 +81,12 @@ public class FonctionService {
 		return fonctionRepository.findAll();
 	}
 	
-	public Optional<Object> getById(String id){
-		return fonctionRepository.findById(id).map(FonctionDTO::new);
+	public Optional<Fonction> getById(String id){
+		return fonctionRepository.findOneById(id);
 	}
 	
-	public Page<Fonction> getAllByMc(String mc, Pageable pageable){
-		return null;
+	public Page<FonctionDTO> getAllByMc(Pageable pageable){
+		return fonctionRepository.findAll(pageable).map(FonctionDTO::new);
 	}
 
 }

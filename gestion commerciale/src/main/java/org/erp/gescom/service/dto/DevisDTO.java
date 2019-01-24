@@ -3,25 +3,39 @@ package org.erp.gescom.service.dto;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import org.erp.gescom.domain.Article;
 import org.erp.gescom.domain.Client;
 import org.erp.gescom.domain.Devis;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 public class DevisDTO {
 	
-	@Id
 	private String numeroDevis;
+	
 	private Instant dateDebutDebit;
+	
+	
 	private Instant dateEcheanceDevis;
+	
 	@NumberFormat
-	
 	private int nombre;
-	private boolean etat;
 	
+	private boolean etat;
+	@JsonIgnore
+	private Set<String> articles ;
+	@DBRef
 	private Client client;
+	@NumberFormat
 	private double montantTTC;
 	public DevisDTO() {
 		super();
@@ -30,10 +44,14 @@ public class DevisDTO {
 	public DevisDTO(Devis devis) {
 		
 		this.numeroDevis = devis.getNumeroDevis();
-		this.dateDebutDebit = devis.getDateDebutDebit();
+		this.dateDebutDebit = Instant.now();//date Debut Devis
 		this.dateEcheanceDevis = devis.getDateEcheanceDevis();
 		this.nombre = devis.getNombre();
+		this.client = devis.getClient();
 		this.montantTTC = devis.getMontantTTC();
+		this.articles = devis.getArticles().stream()
+						.map(Article::getRefArticle)
+						.collect(Collectors.toSet());
 	}
 	public String getNumeroDevis() {
 		return numeroDevis;
@@ -76,6 +94,12 @@ public class DevisDTO {
 	}
 	public void setClient(Client client) {
 		this.client = client;
+	}
+	public Set<String> getArticles() {
+		return articles;
+	}
+	public void setArticles(Set<String> articles) {
+		this.articles = articles;
 	}
 	
 	

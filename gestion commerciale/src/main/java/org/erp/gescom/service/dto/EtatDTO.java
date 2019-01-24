@@ -4,12 +4,17 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.erp.gescom.domain.Commande;
 import org.erp.gescom.domain.Etat;
 import org.erp.gescom.domain.Facture;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 public class EtatDTO {
@@ -17,13 +22,18 @@ public class EtatDTO {
 	@Id
 	private String idEtat;
 	
-	@Size(max=30)
+	@NotNull
+	@Field("libelle_etat")
+	@Size(max=20)
 	private String libelleEtat;
+	
 	private boolean etat;
-	
-	private Set<Commande>commandes;
-	
-	private Set<Facture>factures; 
+	@JsonIgnore
+	@DBRef
+	private Set<String>commandes;
+	@JsonIgnore
+	@DBRef
+	private Set<Facture>factures;
 	public EtatDTO() {
 		
 	}
@@ -49,10 +59,10 @@ public class EtatDTO {
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public Set<Commande> getCommandes() {
+	public Set<String> getCommandes() {
 		return commandes;
 	}
-	public void setCommandes(Set<Commande> commandes) {
+	public void setCommandes(Set<String> commandes) {
 		this.commandes = commandes;
 	}
 	public Set<Facture> getFactures() {

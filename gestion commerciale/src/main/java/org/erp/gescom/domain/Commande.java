@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -37,25 +38,17 @@ public class Commande  implements Serializable{
 	private Instant date = null;
 	
 	private boolean etat;
-	
-	//private Client client;
+	@DBRef
+	private Client client;
+	@DBRef
+	private Facture facture;
 	@JsonIgnore
+	@DBRef
 	private List<Etat> etatCommandes;
 	@JsonIgnore
+	@DBRef
 	private Set<LigneCommande> items;
 	
-	//private Facture facture;
-	
-	/*public Commande() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Commande(String numCommande,String libelleCommande, Instant date) {
-		super();
-		this.numero = numCommande;
-		this.date = date;
-		this.libelleCommande = libelleCommande;
-	}*/
 	public String getNumCommande() {
 		return numero;
 	}
@@ -96,6 +89,18 @@ public class Commande  implements Serializable{
 		this.items = items;
 	}
 	
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
+	public Facture getFacture() {
+		return facture;
+	}
+	public void setFacture(Facture facture) {
+		this.facture = facture;
+	}
 	public boolean equals(Object o){
 		if( this == o){
 			return true;

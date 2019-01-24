@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Document(collection="devis")
 public class Devis  implements Serializable{
@@ -31,26 +35,16 @@ public class Devis  implements Serializable{
 	private int nombre;
 	
 	private boolean etat;
-	
+	@JsonIgnore
+	@DBRef
+	private Set<Article> articles ;
+	@DBRef
 	private Client client;
-	
 	@NumberFormat
 	@Field("montant_TTc")
 	private double montantTTC;
 	
-	/*public Devis() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Devis(Long numeroDevis, Instant dateDebutDebit, Instant dateEcheanceDevis, int nombre,
-			double montantTTC) {
-		super();
-		this.numeroDevis = numeroDevis;
-		this.dateDebutDebit = dateDebutDebit;
-		this.dateEcheanceDevis = dateEcheanceDevis;
-		this.nombre = nombre;
-		this.montantTTC = montantTTC;
-	}*/
+	
 	public String getNumeroDevis() {
 		return numero;
 	}
@@ -87,13 +81,20 @@ public class Devis  implements Serializable{
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
+	
+	
+	public Set<Article> getArticles() {
+		return articles;
+	}
+	public void setArticles(Set<Article> articles) {
+		this.articles = articles;
+	}
 	public Client getClient() {
 		return client;
 	}
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
 	public boolean equals(Object o){
 		if(this==o){
 			return true;
@@ -112,7 +113,7 @@ public class Devis  implements Serializable{
 	@Override
 	public String toString() {
 		return "Devis [numero=" + numero + ", dateDebutDebit=" + dateDebutDebit + ", dateEcheanceDevis="
-				+ dateEcheanceDevis + ", nombre=" + nombre + ", etat=" + etat + ", client=" + client + ", montantTTC="
+				+ dateEcheanceDevis + ", nombre=" + nombre + ", etat=" + etat +  ", montantTTC="
 				+ montantTTC + "]";
 	}
 	

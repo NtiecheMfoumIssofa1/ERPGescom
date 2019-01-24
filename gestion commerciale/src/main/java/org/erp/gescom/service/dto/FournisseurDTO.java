@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -38,13 +40,13 @@ public class FournisseurDTO {
 	private String email;
 	private boolean etat;
 	
-	private List<Article> articles;
+	private List<String> articles;
 
 	private StatutDTO statut;
 	
 	private CategorieFournisseur categorieFournisseur;
 	
-	private Set<Commande>commandes;
+	
 	public FournisseurDTO() {
 		
 	}
@@ -57,6 +59,11 @@ public class FournisseurDTO {
 		this.adresse = fournisseur.getAdresse();
 		this.telephone = fournisseur.getTelephone();
 		this.email = fournisseur.getEmail();
+		this.categorieFournisseur=fournisseur.getCategorieFournisseur();
+		this.articles = fournisseur.getArticles().stream()
+						.map(Article::getRefArticle)
+						.collect(Collectors.toList());
+		
 	}
 	public String getIdFournisseur() {
 		return idFournisseur;
@@ -106,10 +113,10 @@ public class FournisseurDTO {
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public List<Article> getArticles() {
+	public List<String> getArticles() {
 		return articles;
 	}
-	public void setArticles(List<Article> articles) {
+	public void setArticles(List<String> articles) {
 		this.articles = articles;
 	}
 	public StatutDTO getStatut() {
@@ -124,12 +131,13 @@ public class FournisseurDTO {
 	public void setCategorieFournisseur(CategorieFournisseur categorieFournisseur) {
 		this.categorieFournisseur = categorieFournisseur;
 	}
-	public Set<Commande> getCommandes() {
+	
+	/*public Set<String> getCommandes() {
 		return commandes;
 	}
-	public void setCommandes(Set<Commande> commandes) {
+	public void setCommandes(Set<String> commandes) {
 		this.commandes = commandes;
-	}
+	}*/
 	
 	
 	

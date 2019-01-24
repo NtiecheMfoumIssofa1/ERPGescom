@@ -3,6 +3,8 @@ package org.erp.gescom.service.dto;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.Size;
 
@@ -13,11 +15,11 @@ import org.springframework.data.annotation.Id;
 public class TypeClientDTO {
 	
 	@Id
-	private Long idType;
+	private String idType;
 	
 	@Size(max=50)
 	private String libelleType;
-	private List<Client> clients;
+	private List<String> clients;
 	private boolean etat;
 	public TypeClientDTO() {
 		super();
@@ -26,11 +28,14 @@ public class TypeClientDTO {
 	public TypeClientDTO(TypeClient typeClient) {
 	
 		this.libelleType = typeClient.getLibelleType();
+		this.clients = typeClient.getClients().stream()
+							.map(Client::getNomComplet)
+							.collect(Collectors.toList());
 	}
-	public Long getIdType() {
+	public String getIdType() {
 		return idType;
 	}
-	public void setIdType(Long idType) {
+	public void setIdType(String idType) {
 		this.idType = idType;
 	}
 	public String getLibelleType() {
@@ -39,10 +44,10 @@ public class TypeClientDTO {
 	public void setLibelleType(String libelleType) {
 		this.libelleType = libelleType;
 	}
-	public List<Client> getClients() {
+	public List<String> getClients() {
 		return clients;
 	}
-	public void setClients(List<Client> clients) {
+	public void setClients(List<String> clients) {
 		this.clients = clients;
 	}
 	public boolean isEtat() {

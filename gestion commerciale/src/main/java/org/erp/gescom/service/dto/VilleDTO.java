@@ -3,10 +3,14 @@ package org.erp.gescom.service.dto;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.erp.gescom.domain.Agence;
+import org.erp.gescom.domain.Ville;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -24,7 +28,24 @@ public class VilleDTO  implements Serializable{
 	@Size(max=30)
 	private String libelle;
 	
-	private List<AgenceDTO> agences;
+	private List<String> agences;
+
+	
+	
+	public VilleDTO() {
+		
+	}
+	
+
+	public VilleDTO(Ville ville) {
+		
+		this.id = ville.getId();
+		this.libelle = ville.getLibelle();
+		this.agences = ville.getAgences().stream()
+							.map(Agence::getDescription)
+							.collect(Collectors.toList());
+	}
+
 
 	public String getId() {
 		return id;
@@ -42,11 +63,11 @@ public class VilleDTO  implements Serializable{
 		this.libelle = libelle;
 	}
 
-	public List<AgenceDTO> getAgences() {
+	public List<String> getAgences() {
 		return agences;
 	}
 
-	public void setAgences(List<AgenceDTO> agences) {
+	public void setAgences(List<String> agences) {
 		this.agences = agences;
 	}
 	

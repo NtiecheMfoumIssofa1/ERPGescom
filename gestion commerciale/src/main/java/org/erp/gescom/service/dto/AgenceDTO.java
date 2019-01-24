@@ -13,8 +13,11 @@ import org.erp.gescom.domain.Agence;
 import org.erp.gescom.domain.Facture;
 import org.erp.gescom.domain.Ville;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 public class AgenceDTO  implements Serializable{
@@ -28,14 +31,15 @@ public class AgenceDTO  implements Serializable{
 	private String id;
 	
 	
+	@NotNull
 	@Size(min = 10, max=50)
 	private String description;
 	
-	
+	@NotNull
 	@Size( max=30)
 	private String address;
 	
-	
+	@NotNull
 	@Size( max=50)
 	private String telephone;
 	
@@ -43,8 +47,9 @@ public class AgenceDTO  implements Serializable{
 	@NotNull
 	private String email;
 	
+	@JsonIgnore
 	private Set<String > factures;
-	
+	@JsonIgnore
 	private Ville ville;
 
 	
@@ -61,10 +66,10 @@ public class AgenceDTO  implements Serializable{
 		this.address = agence.getAddress();
 		this.telephone = agence.getTelephone();
 		this.email = agence.getEmail();				
-		//this.ville = agence.getVille();
-		this.factures = agence.getFactures().stream()
+		this.ville = agence.getVille();
+		/*this.factures = agence.getFactures().stream()
 				.map(Facture::getIdFacture)
-				.collect(Collectors.toSet());
+				.collect(Collectors.toSet());*/
 	}
 
 	public String getId() {

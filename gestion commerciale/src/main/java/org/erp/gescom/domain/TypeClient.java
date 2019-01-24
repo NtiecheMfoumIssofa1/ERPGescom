@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -27,18 +28,12 @@ public class TypeClient  implements Serializable{
 	@Field("libelle_type")
 	private String libelleType;
 	@JsonIgnore
+	@DBRef
 	private List<Client> clients;
 	
 	private boolean etat;
-	/*public TypeClient() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public TypeClient(String libelleType, boolean etat) {
-		super();
-		this.libelleType = libelleType;
-		this.etat = etat;
-	}*/
+
+
 	public String getIdType() {
 		return idType;
 	}

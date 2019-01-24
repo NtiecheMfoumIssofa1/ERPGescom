@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
@@ -21,30 +22,24 @@ public class Taxes  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String idTaxe;
+	private String id;
 	
 	@NumberFormat
 	@Field("taux_tva")
 	private double tauxtaxe;
 	@JsonIgnore
+	@DBRef
 	private List<Article> articles;
 	
 	private boolean etat;
 	
-	/*public Taxes() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Taxes(double tauxtaxe) {
-		super();
-		this.tauxtaxe = tauxtaxe;
-	}*/
+
 	
 	public String getIdTaxe() {
-		return idTaxe;
+		return id;
 	}
 	public void setIdTaxe(String idTaxe) {
-		this.idTaxe = idTaxe;
+		this.id = idTaxe;
 	}
 	public double getTauxtaxe() {
 		return tauxtaxe;
@@ -82,7 +77,7 @@ public class Taxes  implements Serializable{
     }
 	@Override
 	public String toString() {
-		return "Taxes [idTaxe=" + idTaxe + ", tauxtaxe=" + tauxtaxe + ", articles=" + articles + ", etat=" + etat + "]";
+		return "Taxes [idTaxe=" + id + ", tauxtaxe=" + tauxtaxe + ", articles=" + articles + ", etat=" + etat + "]";
 	}
 
 }

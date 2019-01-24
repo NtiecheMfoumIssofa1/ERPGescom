@@ -7,6 +7,7 @@ import org.erp.gescom.config.Constants;
 import javax.validation.constraints.Email;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
@@ -79,6 +80,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @JsonIgnore
     private Set<Authority> authorities = new HashSet<>();
+    
+    @DBRef
+    private Fonction fonction;
 
     public String getId() {
         return id;
@@ -185,7 +189,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
-    @Override
+    public Fonction getFonction() {
+		return fonction;
+	}
+
+	public void setFonction(Fonction fonction) {
+		this.fonction = fonction;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

@@ -3,6 +3,8 @@ package org.erp.gescom.service.dto;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.Size;
 
@@ -21,13 +23,16 @@ public class FamilleArticleDTO {
 	private String libelleFamille;
 	private boolean etat;  
 	
-	private List<Article> articles;
+	private List<String> articles;
 	public FamilleArticleDTO() {
 		
 	}
 	public FamilleArticleDTO(FamilleArticle familleArticle) {
 		this.idFamille = familleArticle.getIdFamille();
 		this.libelleFamille = familleArticle.getLibelleFamille();
+		this.articles = familleArticle.getArticles().stream()
+							.map(Article::getRefArticle)
+							.collect(Collectors.toList());
 	}
 	public String getIdFamille() {
 		return idFamille;
@@ -47,10 +52,10 @@ public class FamilleArticleDTO {
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public List<Article> getArticles() {
+	public List<String> getArticles() {
 		return articles;
 	}
-	public void setArticles(List<Article> articles) {
+	public void setArticles(List<String> articles) {
 		this.articles = articles;
 	}
 	

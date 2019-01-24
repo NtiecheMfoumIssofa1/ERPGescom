@@ -6,7 +6,10 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.erp.gescom.domain.Agence;
+import org.erp.gescom.domain.Commande;
 import org.erp.gescom.domain.Etat;
 import org.erp.gescom.domain.Facture;
 import org.erp.gescom.domain.ModeReglement;
@@ -24,11 +27,13 @@ public class FactureDTO {
 	private double montantTTC;
 	private boolean etat;
 	
-	private List<Etat> etatFacture;
+	private List<String> etatFacture;
 	
+	private List<String> commandes;
 	
+	private Set<String> modeReglements;
 	
-	private Set<ModeReglement> modeReglements;
+	private Agence agence;
 	public FactureDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -39,6 +44,16 @@ public class FactureDTO {
 		this.dateDebutFacture = facture.getDateDebutFacture();
 		this.dateEcheanceFacture = facture.getDateEcheanceFacture();
 		this.montantTTC = facture.getMontantTTC();
+		this.agence = facture.getAgence();
+		this.etatFacture = facture.getEtatFacture().stream()
+								.map(Etat::getLibelleEtat)
+								.collect(Collectors.toList());
+		this.modeReglements = facture.getModeReglements().stream()
+								.map(ModeReglement::getLibelleReglement)
+								.collect(Collectors.toSet());
+		this.commandes = facture.getCommandes().stream()
+							.map(Commande::getNumCommande)
+							.collect(Collectors.toList());
 	}
 	public String getIdFacture() {
 		return idFacture;
@@ -70,18 +85,30 @@ public class FactureDTO {
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public List<Etat> getEtatFacture() {
+	public List<String> getEtatFacture() {
 		return etatFacture;
 	}
-	public void setEtatFacture(List<Etat> etatFacture) {
+	public void setEtatFacture(List<String> etatFacture) {
 		this.etatFacture = etatFacture;
 	}
 	
-	public Set<ModeReglement> getModeReglements() {
+	public Set<String> getModeReglements() {
 		return modeReglements;
 	}
-	public void setModeReglements(Set<ModeReglement> modeReglements) {
+	public void setModeReglements(Set<String> modeReglements) {
 		this.modeReglements = modeReglements;
+	}
+	public List<String> getCommandes() {
+		return commandes;
+	}
+	public void setCommandes(List<String> commandes) {
+		this.commandes = commandes;
+	}
+	public Agence getAgence() {
+		return agence;
+	}
+	public void setAgence(Agence agence) {
+		this.agence = agence;
 	}
 	
 	

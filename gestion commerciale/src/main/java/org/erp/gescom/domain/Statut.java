@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -29,19 +31,8 @@ public class Statut implements Serializable{
 	
 	private boolean etat;
 	@JsonIgnore
-	private List<Fournisseur> fournisseurs;
-	@JsonIgnore
-	private List<Client> clients;
-	
-	/*public Statut() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Statut(String libelleStatut) {
-		super();
-		this.libelleStatut = libelleStatut;
-	}*/
-	
+	@DBRef
+	private Set<Client> clients;
 	public String getIdStatut() {
 		return id;
 	}
@@ -60,17 +51,14 @@ public class Statut implements Serializable{
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public List<Fournisseur> getFournisseurs() {
-		return fournisseurs;
-	}
-	public void setFournisseurs(List<Fournisseur> fournisseurs) {
-		this.fournisseurs = fournisseurs;
-	}
 	
-	public List<Client> getClients() {
+	
+	
+	
+	public Set<Client> getClients() {
 		return clients;
 	}
-	public void setClients(List<Client> clients) {
+	public void setClients(Set<Client> clients) {
 		this.clients = clients;
 	}
 	public boolean equals(Object o){
@@ -90,8 +78,8 @@ public class Statut implements Serializable{
     }
 	@Override
 	public String toString() {
-		return "Statut [id=" + id + ", libelleStatut=" + libelleStatut + ", etat=" + etat + ", fournisseurs="
-				+ fournisseurs + ", clients=" + clients + "]";
+		return "Statut [id=" + id + ", libelleStatut=" + libelleStatut + ", etat=" + etat + ", clients="
+				+ clients + "]";
 	}
 	
 	

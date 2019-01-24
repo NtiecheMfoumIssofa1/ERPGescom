@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -29,19 +30,12 @@ public class Fonction  implements Serializable{
 	@Field("libelle_fonction")
 	private String libelleFonction;
 	@JsonIgnore
+	@DBRef
 	private List<User> appUsers;
 	
 	private String action ="DESACTIVEE";
 	
-	/*public Fonction() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Fonction(String libelleFonction) {
-		super();
-		this.libelleFonction = libelleFonction;
-	}*/
+	
 
 	public String getIdFonction() {
 		return id;
@@ -64,12 +58,6 @@ public class Fonction  implements Serializable{
 	}
 
 	public void setAction(String action) {
-		this.action = action;
-	}
-
-	public Fonction(String libelleFonction, String action) {
-		super();
-		this.libelleFonction = libelleFonction;
 		this.action = action;
 	}
 

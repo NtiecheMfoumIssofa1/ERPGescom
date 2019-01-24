@@ -3,7 +3,16 @@ package org.erp.gescom.domain;
 import java.io.Serializable;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Document(collection="mode_reglement")
+@TypeAlias("cheque") //remplace l'héritage
 public class Cheque extends ModeReglement implements Serializable{
 
 	/**
@@ -16,6 +25,21 @@ public class Cheque extends ModeReglement implements Serializable{
 	private LocalDate dateValidite = null;
 	
 	private String typeCheque;
+	
+	
+
+	public Cheque() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Cheque(String id, String libelleReglement, List<Facture> factures, String numero, LocalDate dateValidite,
+			String typeCheque) {
+		super(id, libelleReglement, factures);
+		this.numero = numero;
+		this.dateValidite = dateValidite;
+		this.typeCheque = typeCheque;
+	}
 
 	public String getNumero() {
 		return numero;
@@ -40,6 +64,7 @@ public class Cheque extends ModeReglement implements Serializable{
 	public void setTypeCheque(String typeCheque) {
 		this.typeCheque = typeCheque;
 	}
+
 	
 	
 	

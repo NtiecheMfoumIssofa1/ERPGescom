@@ -55,7 +55,7 @@ public class CategorieFournisseurMapper {
 	public List<Depence> depenseFromStrings(List<String> strings){
 		return strings.stream().map(string ->{
 			 Depence depense = new Depence();
-			 depense.setLibelleDepnse(string);
+			 depense.setLibelleDepence(string);
 			 return depense;
 		}).collect(Collectors.toList());
 	}

@@ -4,57 +4,62 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.erp.gescom.domain.CategorieFournisseur;
 import org.erp.gescom.domain.Depence;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
 
 
 
-public class DepenseDTO {
+public class DepenceDTO {
 	
 	@Id
 	private String numeroDepense;
 	
-	@Size(max=30)
-	private String libelleDepnse;
+	@NotNull
+	private String libelleDepence;
 	
-	@Size(max=25)
+	@NotNull
+	@Size(max=50)
 	private String destinataire;
 	
-	private Instant dateDepense;
+	private Instant dateDepence = null ;
 	
 	@NumberFormat
+	@NotNull
 	private double montant;
 	
 	private boolean etat;
-
 	private CategorieFournisseur categorieFournisseur;
 	
-	public DepenseDTO(){
+	
+	public DepenceDTO(){
 		
 	}
-	public DepenseDTO(Depence d){
-		this.libelleDepnse=d.getLibelleDepnse();
+	public DepenceDTO(Depence d){
+		this.libelleDepence=d.getLibelleDepence();
 		this.destinataire=d.getDestinataire();
-		this.dateDepense=d.getDateDepanse();
+		this.dateDepence=d.getDateDepence();
 		this.montant=d.getMontant();
-		//this.categorieFournisseur=d.getCategorieFournisseur();
+		this.categorieFournisseur=d.getCategorieFournisseur();
 		
 	}
-	public String getNumeroDepense() {
+	public String getNumeroDepence() {
 		return numeroDepense;
 	}
-	public void setNumeroDepense(String numeroDepense) {
+	public void setNumeroDepence(String numeroDepense) {
 		this.numeroDepense = numeroDepense;
 	}
-	public String getLibelleDepnse() {
-		return libelleDepnse;
+	public String getLibelleDepence() {
+		return libelleDepence;
 	}
-	public void setLibelleDepnse(String libelleDepnse) {
-		this.libelleDepnse = libelleDepnse;
+	public void setLibelleDepence(String libelleDepnse) {
+		this.libelleDepence = libelleDepnse;
 	}
 	public String getDestinataire() {
 		return destinataire;
@@ -62,11 +67,11 @@ public class DepenseDTO {
 	public void setDestinataire(String destinataire) {
 		this.destinataire = destinataire;
 	}
-	public Instant getDateDepanse() {
-		return dateDepense;
+	public Instant getDateDepence() {
+		return dateDepence;
 	}
-	public void setDateDepanse(Instant dateDepanse) {
-		this.dateDepense = dateDepanse;
+	public void setDateDepence(Instant dateDepanse) {
+		this.dateDepence = dateDepanse;
 	}
 	public double getMontant() {
 		return montant;
@@ -88,8 +93,8 @@ public class DepenseDTO {
 	}
 	@Override
 	public String toString() {
-		return "DepenseDTO [numeroDepense=" + numeroDepense + ", libelleDepnse=" + libelleDepnse + ", destinataire="
-				+ destinataire + ", dateDepense=" + dateDepense + ", montant=" + montant + ", etat=" + etat
+		return "DepenseDTO [numeroDepense=" + numeroDepense + ", libelleDepnse=" + libelleDepence + ", destinataire="
+				+ destinataire + ", dateDepense=" + dateDepence + ", montant=" + montant + ", etat=" + etat
 				+ ", categorieFournisseur=" + categorieFournisseur + "]";
 	}
 	

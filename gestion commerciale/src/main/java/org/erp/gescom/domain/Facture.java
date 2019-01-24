@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
@@ -37,25 +38,20 @@ public class Facture  implements Serializable{
 	
 	private boolean etat;
 	@JsonIgnore
+	@DBRef
 	private List<Etat> etatFacture;
 	@JsonIgnore
+	@DBRef
 	private List<Commande>  commandes;
 	@JsonIgnore
+	@DBRef
 	private Set<ModeReglement> modeReglements;
 	
-	//private Agence agence;
+	@DBRef
+	private Agence agence;
+	@DBRef
+	private ModeReglement modeReglement;
 	
-	/*public Facture() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Facture(String idFacture, Instant dateDebutFacture, Instant dateEcheanceFacture, double montantTTC) {
-		super();
-		this.idFacture = idFacture;
-		this.dateDebutFacture = dateDebutFacture;
-		this.dateEcheanceFacture = dateEcheanceFacture;
-		this.montantTTC = montantTTC;
-	}*/
 	public String getIdFacture() {
 		return id;
 	}
@@ -86,6 +82,12 @@ public class Facture  implements Serializable{
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
+	public Agence getAgence() {
+		return agence;
+	}
+	public void setAgence(Agence agence) {
+		this.agence = agence;
+	}
 	public List<Etat> getEtatFacture() {
 		return etatFacture;
 	}
@@ -107,6 +109,12 @@ public class Facture  implements Serializable{
 	}
 	
 
+	public ModeReglement getModeReglement() {
+		return modeReglement;
+	}
+	public void setModeReglement(ModeReglement modeReglement) {
+		this.modeReglement = modeReglement;
+	}
 	public boolean equals(Object o){
 		if(this==o){
 			return true;

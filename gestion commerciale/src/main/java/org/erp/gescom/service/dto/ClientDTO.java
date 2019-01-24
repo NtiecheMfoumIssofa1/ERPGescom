@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.erp.gescom.domain.Client;
@@ -14,6 +15,11 @@ import org.erp.gescom.domain.Devis;
 import org.erp.gescom.domain.Statut;
 import org.erp.gescom.domain.TypeClient;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -24,32 +30,37 @@ public class ClientDTO {
 	private String idClient;
 	
 	@Size(max=60)
+	@NotNull
 	private String nomComplet;
 	
-	@Size(max=30)
+	@Size(max=50)
 	private String adrress;
 	
 	@Size(max=30)
+	@Indexed
 	private String ville;
 	
-	@Size(max=25)
+	@Size(max=15)
 	private String boitePostale;
 	
-	@Size(max=20)
+	@Size(max=15)
 	private String telephone;
 	
 	@Email
-	@Size(max=100)
+    @Size(min = 5, max = 254)
 	private String email;
+	
 	private boolean etat;
+
 	private TypeClient typeClient;
-	
-	private List<String> devis;
-	
+	@JsonIgnore
 	private List<String> commandes;
+	@JsonIgnore
+	private List<String> devis;
+	@JsonIgnore
 	private List<String> statuts;
 	
-	private ClientDTO(){
+	public ClientDTO(){
 		
 	}
 	
@@ -61,7 +72,7 @@ public class ClientDTO {
 		this.boitePostale=c.getBoitePostale();
 		this.telephone=c.getTelephone();
 		this.email=c.getEmail();
-		//this.typeClient=c.getTypeClient();
+		this.typeClient=c.getTypeClient();
 		this.devis=c.getDevis().stream()
 						.map(Devis::getNumeroDevis)
 						.collect(Collectors.toList());

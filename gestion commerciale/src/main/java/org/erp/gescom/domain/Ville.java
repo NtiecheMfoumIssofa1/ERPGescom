@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -28,6 +29,7 @@ public class Ville  implements Serializable{
 	@Size(max=30)
 	private String libelle;
 	@JsonIgnore
+	@DBRef
 	private List<Agence> agences ;
 
 	public String getId() {

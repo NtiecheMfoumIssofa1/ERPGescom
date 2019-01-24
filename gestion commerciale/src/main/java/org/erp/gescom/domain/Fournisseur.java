@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
@@ -57,29 +58,12 @@ public class Fournisseur  implements Serializable{
 	
 	private boolean etat;
 	@JsonIgnore
+	@DBRef
 	private List<Article> articles;
-
-	//private Statut statut;
+	@DBRef
+	private CategorieFournisseur categorieFournisseur; 	
 	
-	//private CategorieFournisseur categorieFournisseur;
-	@JsonIgnore
-	private Set<Commande>commandes;
 	
-	/*public Fournisseur() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Fournisseur(Long idFournisseur, String nomComplet, String ville, String boitePostale, String adresse,
-			String telephone, String email) {
-		super();
-		this.idFournisseur = idFournisseur;
-		this.nomComplet = nomComplet;
-		this.ville = ville;
-		this.boitePostale = boitePostale;
-		this.adresse = adresse;
-		this.telephone = telephone;
-		this.email = email;
-	}*/
 	public String getIdFournisseur() {
 		return idFournisseur;
 	}
@@ -136,12 +120,13 @@ public class Fournisseur  implements Serializable{
 	}
 	
 	
+
 	
-	public Set<Commande> getCommandes() {
-		return commandes;
+	public CategorieFournisseur getCategorieFournisseur() {
+		return categorieFournisseur;
 	}
-	public void setCommandes(Set<Commande> commandes) {
-		this.commandes = commandes;
+	public void setCategorieFournisseur(CategorieFournisseur categorieFournisseur) {
+		this.categorieFournisseur = categorieFournisseur;
 	}
 	
 	public boolean equals(Object o){
@@ -163,7 +148,7 @@ public class Fournisseur  implements Serializable{
 	public String toString() {
 		return "Fournisseur [idFournisseur=" + idFournisseur + ", nomComplet=" + nomComplet + ", ville=" + ville
 				+ ", boitePostale=" + boitePostale + ", adresse=" + adresse + ", telephone=" + telephone + ", email="
-				+ email + ", etat=" + etat + ", articles=" + articles + ", commandes=" + commandes + "]";
+				+ email + ", etat=" + etat + ", articles=" + articles + "]";
 	}
 	
 	

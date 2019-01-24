@@ -6,9 +6,11 @@ import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
-
+@Document(collection="ligne_commande")
 public class LigneCommande implements Serializable{
 
 	/**
@@ -29,9 +31,8 @@ public class LigneCommande implements Serializable{
 	@NumberFormat
 	private Double prixUnitaire;
 	
-	//private  Article article;
-	
-	//private Commande commande;
+	@DBRef
+	private Commande commande;
 
 	public String getId() {
 		return id;
@@ -59,6 +60,14 @@ public class LigneCommande implements Serializable{
 
 	
 	
+	public Commande getCommande() {
+		return commande;
+	}
+
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
+
 	public boolean equals(Object o){
 		if( this == o){
 			return true;

@@ -2,6 +2,8 @@ package org.erp.gescom.service.dto;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.Size;
 
@@ -17,7 +19,7 @@ public class FonctionDTO {
 	@Size(max=30)
 	private String libelleFonction;
 	
-	private List<User> appUsers;
+	private List<String> appUsers;
 	
 	private String action ="DESACTIVEE";
 	
@@ -29,6 +31,9 @@ public class FonctionDTO {
 	public FonctionDTO(Fonction fonction) {
 		this.idFonction= fonction.getIdFonction();
 		this.libelleFonction = fonction.getLibelleFonction();
+		this.appUsers= fonction.getAppUsers().stream()
+						.map(User::getEmail)
+						.collect(Collectors.toList());
 	}
 
 	public String getIdFonction() {
@@ -61,11 +66,11 @@ public class FonctionDTO {
 		this.action = action;
 	}
 
-	public List<User> getAppUsers() {
+	public List<String> getAppUsers() {
 		return appUsers;
 	}
 
-	public void setAppUsers(List<User> appUsers) {
+	public void setAppUsers(List<String> appUsers) {
 		this.appUsers = appUsers;
 	}
 	

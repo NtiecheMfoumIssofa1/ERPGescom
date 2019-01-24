@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -33,18 +34,13 @@ public class CategorieFournisseur  implements Serializable{
 	
 	private boolean etat;
 	@JsonIgnore
+	@DBRef
 	private List<Fournisseur> fournisseurs;
 	@JsonIgnore
+	@DBRef
 	private List<Depence> depenses;
 	
-/*	public CategorieFournisseur() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public CategorieFournisseur(String libelle) {
-		super();
-		this.libelle = libelle;
-	}*/
+
 	public String getId() {
 		return id;
 	}

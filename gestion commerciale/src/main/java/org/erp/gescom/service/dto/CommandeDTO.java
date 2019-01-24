@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.erp.gescom.domain.Client;
@@ -17,6 +18,10 @@ import org.erp.gescom.domain.Facture;
 import org.erp.gescom.domain.Fournisseur;
 import org.erp.gescom.domain.LigneCommande;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -25,19 +30,21 @@ public class CommandeDTO {
 	@Id
 	private String numCommande;
 	
-	@Size(max=30)
+	@Size(max=50)
+	@NotNull
 	private String libelleCommande;
+	
+
 	private Instant date = null;
+	
 	private boolean etat;
 	
-	private Fournisseur fournisseur;
-	
-	private List<String> etatCommandes;
-	
-	private Facture facture;
-	
 	private Client client;
-	
+
+	private Facture facture;
+	@JsonIgnore
+	private List<String> etatCommandes;
+	@JsonIgnore
 	private Set<String> ligneCommandes;
 	
 	public CommandeDTO(){
@@ -47,6 +54,8 @@ public class CommandeDTO {
 		this.libelleCommande=c.getLibelleCommande();
 		this.date=c.getDate();
 		this.numCommande = c.getNumCommande();
+		this.client = c.getClient();
+		this.facture = c.getFacture();
 		this.etatCommandes = c.getEtatCommandes().stream()
 								.map(Etat::getLibelleEtat)
 								.collect(Collectors.toList());
@@ -79,12 +88,7 @@ public class CommandeDTO {
 	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
-	public Fournisseur getFournisseur() {
-		return fournisseur;
-	}
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
-	}
+	
 	public List<String> getEtatCommandes() {
 		return etatCommandes;
 	}

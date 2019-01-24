@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -32,16 +33,10 @@ public class FamilleArticle  implements Serializable{
 	
 	private boolean etat;  
 	@JsonIgnore
+	@DBRef
 	private List<Article> articles;
 	
-	/*public FamilleArticle() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public FamilleArticle(String libelleFamille) {
-		super();
-		this.libelleFamille = libelleFamille;
-	}*/
+
 	public String getIdFamille() {
 		return id;
 	}

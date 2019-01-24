@@ -6,11 +6,25 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+//debut annotation heritage
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
+@JsonSubTypes({
+	  @JsonSubTypes.Type(value = Cheque.class, name = "CHEQUE"),
+	  @JsonSubTypes.Type(value = Livraison.class, name = "LIVRAISON"),
+	  @JsonSubTypes.Type(value = MtnMobileMoney.class, name = "MTN"),
+	  @JsonSubTypes.Type(value =  OrangeMoney.class, name= "ORANGE")
+	})
+//fin annotation héritage
 @Document(collection="mode_reglement")
-public class ModeReglement  implements Serializable{
+//@RestResource(path="abstractFoos")
+public  class ModeReglement  implements Serializable{
 
 	/**
 	 * 
@@ -18,62 +32,56 @@ public class ModeReglement  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String libelleReglement;
-	
-	private boolean etat;
+	private String id;
+	private   String libelleReglement;
+
 	@JsonIgnore
+	@DBRef
 	private List<Facture>factures;
 	
-	/*public ModeReglement() {
+	
+
+	public ModeReglement() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ModeReglement(String libelleReglement) {
-		super();
-		this.libelleReglement = libelleReglement;
-	}*/
 	
+	
+
+	public ModeReglement(String id, String libelleReglement,List<Facture>factures) {
+		super();
+		this.id = id;
+		this.libelleReglement = libelleReglement;
+		this.factures = factures;
+	}
+
+
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getLibelleReglement() {
 		return libelleReglement;
 	}
+
 	public void setLibelleReglement(String libelleReglement) {
 		this.libelleReglement = libelleReglement;
 	}
-	public boolean isEtat() {
-		return etat;
-	}
-	public void setEtat(boolean etat) {
-		this.etat = etat;
-	}
+
 	public List<Facture> getFactures() {
 		return factures;
 	}
+
 	public void setFactures(List<Facture> factures) {
 		this.factures = factures;
 	}
 	
-	public boolean equals(Object o){
-		if(this==o){
-			return true;
-		}
-		if( o == null || getClass() != o.getClass()){
-			return false;
-		}
-		
-		ModeReglement m = (ModeReglement) o;
-		return !(m.getLibelleReglement() == null || getLibelleReglement() == null) && Objects.equals(getLibelleReglement(),m.getLibelleReglement());
-	}
-	@Override
-    public int hashCode() {
-        return Objects.hashCode(getLibelleReglement());
-    }
-	@Override
-	public String toString() {
-		return "ModeReglement [libelleReglement=" + libelleReglement + ", etat=" + etat + ", factures=" + factures
-				+ "]";
-	}
 	
 	
-
-
+	  
 }

@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -46,9 +47,11 @@ public class Agence  implements Serializable{
 	private String email;
 	
 	@JsonIgnore
+	@DBRef
 	private Set<Facture > factures;
-	
-	//private Ville ville;
+	@JsonIgnore
+	@DBRef
+	private Ville ville;
 
 	public String getId() {
 		return id;
@@ -99,6 +102,14 @@ public class Agence  implements Serializable{
 	}
 	
 
+
+	public Ville getVille() {
+		return ville;
+	}
+
+	public void setVille(Ville ville) {
+		this.ville = ville;
+	}
 
 	public boolean equals(Object o){
 		if(this==o){

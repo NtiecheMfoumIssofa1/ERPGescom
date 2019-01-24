@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.NumberFormat;
@@ -27,7 +28,7 @@ public class Depence  implements Serializable{
 	
 	@NotNull
 	@Field("libelle_depense")
-	private String libelleDepnse;
+	private String libelleDepence;
 	
 	@NotNull
 	@Field("destinataire")
@@ -35,7 +36,7 @@ public class Depence  implements Serializable{
 	private String destinataire;
 	
 	@Field("date_depense")
-	private Instant dateDepanse = null ;
+	private Instant dateDepence = null ;
 	
 	@NumberFormat
 	@NotNull
@@ -43,31 +44,20 @@ public class Depence  implements Serializable{
 	private double montant;
 	
 	private boolean etat;
-
-	//private CategorieFournisseur categorieFournisseur;
+	@DBRef
+	private CategorieFournisseur categorieFournisseur;
 	
-	/*public Depense() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Depense(String libelleDepnse, String destinataire, Instant dateDepanse,double montant) {
-		super();
-		this.libelleDepnse = libelleDepnse;
-		this.destinataire = destinataire;
-		this.dateDepanse = dateDepanse;
-		this.montant = montant;
-	}*/
-	public String getNumeroDepense() {
+	public String getNumeroDepence() {
 		return numero;
 	}
-	public void setNumeroDepense(String numeroDepense) {
+	public void setNumeroDepence(String numeroDepense) {
 		this.numero = numeroDepense;
 	}
-	public String getLibelleDepnse() {
-		return libelleDepnse;
+	public String getLibelleDepence() {
+		return libelleDepence;
 	}
-	public void setLibelleDepnse(String libelleDepnse) {
-		this.libelleDepnse = libelleDepnse;
+	public void setLibelleDepence(String libelleDepnse) {
+		this.libelleDepence = libelleDepnse;
 	}
 	public String getDestinataire() {
 		return destinataire;
@@ -75,11 +65,11 @@ public class Depence  implements Serializable{
 	public void setDestinataire(String destinataire) {
 		this.destinataire = destinataire;
 	}
-	public Instant getDateDepanse() {
-		return dateDepanse;
+	public Instant getDateDepence() {
+		return dateDepence;
 	}
-	public void setDateDepanse(Instant dateDepanse) {
-		this.dateDepanse = dateDepanse;
+	public void setDateDepence(Instant dateDepanse) {
+		this.dateDepence = dateDepanse;
 	}
 	public double getMontant() {
 		return montant;
@@ -95,6 +85,12 @@ public class Depence  implements Serializable{
 	}
 	
 	
+	public CategorieFournisseur getCategorieFournisseur() {
+		return categorieFournisseur;
+	}
+	public void setCategorieFournisseur(CategorieFournisseur categorieFournisseur) {
+		this.categorieFournisseur = categorieFournisseur;
+	}
 	public boolean equals(Object o){
 		if(this == o){
 			return true;
@@ -103,17 +99,17 @@ public class Depence  implements Serializable{
 			return false;
 		}
 		Depence d = (Depence) o;
-		return !(d.getNumeroDepense() == null || getNumeroDepense() == null) && Objects.equals(getNumeroDepense(), d.getNumeroDepense());
+		return !(d.getNumeroDepence() == null || getNumeroDepence() == null) && Objects.equals(getNumeroDepence(), d.getNumeroDepence());
 	}
 	
 	@Override
     public int hashCode() {
-        return Objects.hashCode(getNumeroDepense());
+        return Objects.hashCode(getNumeroDepence());
     }
 	@Override
 	public String toString() {
-		return "Depense [numero=" + numero + ", libelleDepnse=" + libelleDepnse + ", destinataire=" + destinataire
-				+ ", dateDepanse=" + dateDepanse + ", montant=" + montant + ", etat=" + etat + "]";
+		return "Depense [numero=" + numero + ", libelleDepnse=" + libelleDepence + ", destinataire=" + destinataire
+				+ ", dateDepanse=" + dateDepence + ", montant=" + montant + ", etat=" + etat + "]";
 	}
 	
 	

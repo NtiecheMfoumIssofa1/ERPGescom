@@ -11,6 +11,10 @@ import org.erp.gescom.domain.CategorieFournisseur;
 import org.erp.gescom.domain.Depence;
 import org.erp.gescom.domain.Fournisseur;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -23,8 +27,9 @@ public class CategorieFournisseurDTO {
 	private String libelleCategorie;
 	
 	private boolean etat;
-	
+	@JsonIgnore
 	private List<String> fournisseurs;
+	@JsonIgnore
 	private List<String> depenses;
 	
 	public CategorieFournisseurDTO() {
@@ -38,7 +43,7 @@ public class CategorieFournisseurDTO {
 							.map(Fournisseur::getNomComplet)
 							.collect(Collectors.toList());
 		this.depenses=c.getDepenses().stream()
-						.map(Depence::getLibelleDepnse)
+						.map(Depence::getLibelleDepence)
 						.collect(Collectors.toList());
 	}
 	public String getIdCategorie() {

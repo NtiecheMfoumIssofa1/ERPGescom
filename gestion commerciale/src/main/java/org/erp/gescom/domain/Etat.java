@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -25,7 +26,6 @@ public class Etat  implements Serializable{
 	private String id;
 	
 	@NotNull
-	@Field("libelle_etat")
 	@Size(max=20)
 	private String libelleEtat;
 	
@@ -35,14 +35,6 @@ public class Etat  implements Serializable{
 	@JsonIgnore
 	private Set<Facture>factures; 
 	
-	public Etat() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Etat(String libelleEtat) {
-		super();
-		this.libelleEtat = libelleEtat;
-	}
 	public String getIdEtat() {
 		return id;
 	}

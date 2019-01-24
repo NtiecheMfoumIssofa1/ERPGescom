@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 
 
-
+@Document(collection="client")
 public class Client  implements Serializable{
 	
 	/**
@@ -56,29 +58,19 @@ public class Client  implements Serializable{
 	private String email;
 	
 	private boolean etat;
-	
-	//private TypeClient typeClient;
+	@DBRef
+	private TypeClient typeClient;
 	@JsonIgnore
+	@DBRef
 	private List<Commande> commandes;
 	@JsonIgnore
+	@DBRef
 	private List<Devis> devis;
 	@JsonIgnore
+	@DBRef
 	private List<Statut> statuts;
 	
-	/*public Client() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Client(String nomComplet, String adrress, String ville, String boitePostale, String telephone,
-			String email) {
-		super();
-		this.nomComplet = nomComplet;
-		this.adrress = adrress;
-		this.ville = ville;
-		this.boitePostale = boitePostale;
-		this.telephone = telephone;
-		this.email = email;
-	}*/
+
 
 	public String getNomComplet() {
 		return nomComplet;
@@ -148,6 +140,12 @@ public class Client  implements Serializable{
 	}
 	public void setStatuts(List<Statut> statuts) {
 		this.statuts = statuts;
+	}
+	public TypeClient getTypeClient() {
+		return typeClient;
+	}
+	public void setTypeClient(TypeClient typeClient) {
+		this.typeClient = typeClient;
 	}
 	public boolean equals(Object o){
 		if(this == o){

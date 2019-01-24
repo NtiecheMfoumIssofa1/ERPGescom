@@ -34,7 +34,7 @@ public  class Stock  implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	private String refStock;
+	private String ref;
 	
 	@NotNull
 	@Field("designation_stock")
@@ -60,7 +60,7 @@ public  class Stock  implements Serializable{
 	public Stock(String refStock, @NotNull @Size(max = 40) String designationStock, int quantiteStock,
 			Set<Article> articles, boolean etat) {
 		super();
-		this.refStock = refStock;
+		this.ref = refStock;
 		this.designationStock = designationStock;
 		this.quantiteStock = quantiteStock;
 		this.articles = articles;
@@ -70,11 +70,11 @@ public  class Stock  implements Serializable{
 
 
 	public String getRefStock() {
-		return refStock;
+		return ref;
 	}
 
 	public void setRefStock(String refStock) {
-		this.refStock = refStock;
+		this.ref = refStock;
 	}
 
 	public String getDesignationStock() {

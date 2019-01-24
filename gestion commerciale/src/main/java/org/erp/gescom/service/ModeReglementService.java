@@ -10,6 +10,8 @@ import org.erp.gescom.domain.OrangeMoney;
 import org.erp.gescom.repository.ModeReglementRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -72,10 +74,15 @@ public class ModeReglementService {
 	
 	/** find All transaction*/
 	
-	public List<ModeReglement> getAllCheque(){
-		return modeReglementRepository.findAll();
+	public Page<ModeReglement> getAll(Pageable pageable){
+		return modeReglementRepository.findAll(pageable);
 	}
 	
-	
+	public void deleteReglement(String id){
+		modeReglementRepository.findById(id).ifPresent(mode ->{
+			modeReglementRepository.delete(mode);
+			log.debug("Delete Mode_Reglement {}",mode);
+		});
+	}
 
 }

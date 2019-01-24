@@ -76,11 +76,11 @@ public class VilleService {
 	}
 	
 	public Optional<Ville> getById(String id){
-		return villeRepository.findById(id);
+		return villeRepository.findOneById(id);
 	}
 	
-	public Page<Ville> getAllByMc(String mc,Pageable pageable){
-		return null;
+	public Page<VilleDTO> getAllByMc(Pageable pageable){
+		return villeRepository.findAll(pageable).map(VilleDTO::new);
 	}
 
 }

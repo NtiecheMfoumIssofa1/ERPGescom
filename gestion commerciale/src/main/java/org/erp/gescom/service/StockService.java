@@ -113,10 +113,10 @@ public class StockService {
 		return stockRepository.findAll();
 	}
 	public Optional<Stock> getById(String id){
-		return stockRepository.findById(id);
+		return stockRepository.findOneByRef(id);
 	}
-	public Page<Stock> getAllByMc(String mc,Pageable pageable){
-		return null;
+	public Page<StockDTO> getAllByMc(Pageable pageable){
+		return stockRepository.findAll(pageable).map(StockDTO::new);
 	}
 
 }

@@ -22,7 +22,7 @@ public class TypeClient  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String idType;
+	private String id;
 	
 	@NotNull
 	@Field("libelle_type")
@@ -35,10 +35,10 @@ public class TypeClient  implements Serializable{
 
 
 	public String getIdType() {
-		return idType;
+		return id;
 	}
 	public void setIdType(String idType) {
-		this.idType = idType;
+		this.id = idType;
 	}
 	public String getLibelleType() {
 		return libelleType;
@@ -76,7 +76,7 @@ public class TypeClient  implements Serializable{
     }
 	@Override
 	public String toString() {
-		return "TypeClient [idType=" + idType + ", libelleType=" + libelleType + ", clients=" + clients + ", etat="
+		return "TypeClient [idType=" + id + ", libelleType=" + libelleType + ", clients=" + clients + ", etat="
 				+ etat + "]";
 	}
 	

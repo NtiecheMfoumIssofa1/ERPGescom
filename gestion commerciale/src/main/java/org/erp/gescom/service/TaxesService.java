@@ -78,10 +78,10 @@ public class TaxesService {
 		return taxesRepository.findAll();
 	}
 	public Optional<Taxes> getById(String id){
-		return taxesRepository.findById(id);
+		return taxesRepository.findOneById(id);
 	}
-	public Page<Taxes> getAllByMc(String mc, Pageable  pageable){
-		return null;
+	public Page<TaxesDTO> getAllByMc(Pageable  pageable){
+		return taxesRepository.findAll(pageable).map(TaxesDTO::new);
 	}
 	
 }

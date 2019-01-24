@@ -78,11 +78,11 @@ public class TypeclientService {
 	}
 	
 	public Optional<TypeClient> getById(String id){
-		return typeClientRepository.findById(id);
+		return typeClientRepository.findOneById(id);
 	}
 	
-	public Page<TypeClient> geAllBymc(String mc, Pageable pageable){
-		return null;
+	public Page<TypeClientDTO> getAllByMc(Pageable pageable){
+		return typeClientRepository.findAll(pageable).map(TypeClientDTO::new);
 	}
 
 }

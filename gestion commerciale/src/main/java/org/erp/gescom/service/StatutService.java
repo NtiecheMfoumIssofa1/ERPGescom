@@ -86,12 +86,12 @@ public class StatutService {
 	}
 	
 	//getByid
-	public Optional<Object> getByid(String id){
-		return statutRepository.findById(id).map(StatutDTO::new);
+	public Optional<Statut> getByid(String id){
+		return statutRepository.findOneById(id);
 	}
 	//getAllByKeyWord
-	public Page<Statut> getAllByMc(String mc,Pageable pageable){
-		return null;
+	public Page<StatutDTO> getAllByMc(Pageable pageable){
+		return statutRepository.findAll(pageable).map(StatutDTO::new);
 	}
 
 }

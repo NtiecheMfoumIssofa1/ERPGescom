@@ -1,8 +1,8 @@
 {
   "generator-jhipster": {
-    "baseName": "jhipsterMongodbSampleApplication",
-    "packageName": "io.github.jhipster.sample",
-    "packageFolder": "io/github/jhipster/sample",
+    "baseName": "ERPGestionCommercialeApp",
+    "packageName": "org.erp.gescom",
+    "packageFolder": "org/erp/gescom",
     "authenticationType": "jwt",
     "hibernateCache": "no",
     "clusteredHttpSession": false,

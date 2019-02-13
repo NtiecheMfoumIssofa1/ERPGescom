@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Renderer } from '@angular/core';
 import { Router } from '@angular/router';
 // import { AuthService } from '../../core/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { JhiEventManager } from 'ng-jhipster';
+import { LoginService } from '../../services/login.service';
+import { StateStorageService } from '../../services/state-storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit { //OnInit
   disabled : boolean = false;
   userForm: FormGroup;
+  authenticationError: boolean;
+  password: string;
+  rememberMe: boolean;
+  email: string;
+  credentials: any;
   formErrors = {
     'email': '',
     'password': ''
@@ -28,8 +36,15 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(private router: Router,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private eventManager:JhiEventManager,
+              private loginService: LoginService,
+              private stateStorageService:StateStorageService,
+              private elementRef : ElementRef,
+              private renderer:Renderer,
+              ) {
   }
+
 
   ngOnInit() {
     this.buildForm();
@@ -74,9 +89,61 @@ export class LoginComponent implements OnInit {
     //   }
     // }
   }
-  login() {
+  /*login() {
     console.log("login!!!!!!!!!!!!!!!!!!!")
     this.router.navigateByUrl("/auth/dashboard");
+  }*/
+  cancel(){
+    this.credentials = {
+      email:null,
+      password:null,
+      rememberMe:true
+    };
+    this.authenticationError = false;
+    //this.activeModal.dismiss('cancel'); popup avec materiel
   }
+
+  login(){
+    this.loginService
+        .login({
+          email: this.email,
+          password:this.password,
+          rememberMe : this.rememberMe
+        })
+        .then(() =>{
+          this.authenticationError = false;
+          // this.activeModal.dismiss('login success'); à remplacer par active modal materiel
+          if(this.router.url === '/register' || /^\/activate\//.test(this.router.url) || /^\/reset\//.test(this.router.url)) {
+            this.router.navigate(['/auth/dashboard']);
+          }
+
+          this.eventManager.broadcast({
+            name: 'authenticationSuccess',
+            content: 'Sending Authentication Success'
+          });
+          // previousState was set in the authExpiredInterceptor before being redirected to login modal.
+                // since login is succesful, go to stored previousState and clear previousState
+                const redirect = this.stateStorageService.getUrl();
+                if (redirect) {
+                    this.stateStorageService.storeUrl(null);
+                    this.router.navigate([redirect]);
+                }
+        })
+        .catch(() =>{
+          this.authenticationError = true;
+        });
+  }
+
+  register(){
+    // this.activeModal.dismiss('to state register');
+        this.router.navigate(['/register']);
+  }
+
+  requestResetPassword() {
+    //this.activeModal.dismiss('to state requestReset');
+    this.router.navigate(['/reset', 'request']);
+}
+
+
 }
 

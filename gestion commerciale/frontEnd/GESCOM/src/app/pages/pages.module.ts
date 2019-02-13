@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { 
         MatCardModule,
         MatButtonModule,
@@ -31,6 +31,12 @@ import { FactureComponent } from './Ventes/facture/facture.component';
 import { TaxesComponent } from './taxes/taxes.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { ComptabiliteComponent } from './comptabilite/comptabilite.component';
+import { LoginService } from '../services/login.service';
+import { AccountService } from '../services/account.service';
+import { AuthServerProvider } from '../services/auth-jwt.service';
+import { Principal } from '../services/principal.service';
+import { StateStorageService } from '../services/state-storage.service';
+
 
 @NgModule({
     imports: [
@@ -69,6 +75,11 @@ import { ComptabiliteComponent } from './comptabilite/comptabilite.component';
     exports: [
     ],
     providers: [
+        LoginService,
+        AccountService,
+        AuthServerProvider,
+        Principal,
+        StateStorageService,
     ]
 })
 export class PagesModule {

@@ -11,7 +11,7 @@ background-size: cover; ">
                     <a class="redirect" [routerLink]="['/sigup']">Register an account</a>
                 </mat-card-title>
                 <mat-card-content>
-                    <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="userForm">
+                    <form *ngIf="userForm" fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="userForm"><!---->
                         <mat-form-field class="full-width">
                           <input type="email" id="email" class="input" placeholder="Please enter your email"
                                  formControlName="email" required matInput>

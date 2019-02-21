@@ -25,13 +25,14 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     BrowserAnimationsModule,
     Ng2Webstorage.forRoot(),
-    NgJhipsterModule.forRoot({
+    NgJhipsterModule.forRoot({}),
+    /**{
         // set below to true to make alerts look like toast
         alertAsToast: false,
         alertTimeout: 5000,
-        i18nEnabled: true,
+        i18nEnabled: false,
         defaultI18nLang: 'en'
-    }),
+    } */
   ],
   providers: [
     

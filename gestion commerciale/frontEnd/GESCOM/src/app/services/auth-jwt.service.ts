@@ -17,6 +17,7 @@ export class AuthServerProvider{
         }
 
         login(credentials):Observable<any>{
+            console.log("AuthSeverProvider"+ credentials);
             const data = {
                 email:credentials.email,
                 password:credentials.password,

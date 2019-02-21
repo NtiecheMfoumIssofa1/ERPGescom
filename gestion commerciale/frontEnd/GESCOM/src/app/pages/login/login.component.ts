@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit { //OnInit
   userForm: FormGroup;
   authenticationError: boolean;
   password: string;
-  rememberMe: boolean;
+  rememberMe: boolean=true;
   email: string;
   credentials: any;
   formErrors = {
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit { //OnInit
       ],
       'password': ['', [
         //Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
-        Validators.minLength(6),
+        Validators.minLength(3),
         Validators.maxLength(25)
       ]
       ],
@@ -102,36 +102,39 @@ export class LoginComponent implements OnInit { //OnInit
     this.authenticationError = false;
     //this.activeModal.dismiss('cancel'); popup avec materiel
   }
+/*
 
-  login(){
+-*/ 
+  login(dataForm){
+    console.log(dataForm);
+
     this.loginService
-        .login({
-          email: this.email,
-          password:this.password,
-          rememberMe : this.rememberMe
-        })
-        .then(() =>{
-          this.authenticationError = false;
-          // this.activeModal.dismiss('login success'); à remplacer par active modal materiel
-          if(this.router.url === '/register' || /^\/activate\//.test(this.router.url) || /^\/reset\//.test(this.router.url)) {
-            this.router.navigate(['/auth/dashboard']);
-          }
+    .login({
+      dataForm
+    })
+    .then(() =>{
+      this.authenticationError = false;
+      // this.activeModal.dismiss('login success'); à remplacer par active modal materiel
+      if(this.router.url === '/register' || /^\/activate\//.test(this.router.url) || /^\/reset\//.test(this.router.url)) {
+        this.router.navigate(['/auth/dashboard']);
+      }
 
-          this.eventManager.broadcast({
-            name: 'authenticationSuccess',
-            content: 'Sending Authentication Success'
-          });
-          // previousState was set in the authExpiredInterceptor before being redirected to login modal.
-                // since login is succesful, go to stored previousState and clear previousState
-                const redirect = this.stateStorageService.getUrl();
-                if (redirect) {
-                    this.stateStorageService.storeUrl(null);
-                    this.router.navigate([redirect]);
-                }
-        })
-        .catch(() =>{
-          this.authenticationError = true;
-        });
+      this.eventManager.broadcast({
+        name: 'authenticationSuccess',
+        content: 'Sending Authentication Success'
+      });
+      // previousState was set in the authExpiredInterceptor before being redirected to login modal.
+            // since login is succesful, go to stored previousState and clear previousState
+            const redirect = this.stateStorageService.getUrl();
+            if (redirect) {
+                this.stateStorageService.storeUrl(null);
+                this.router.navigate([redirect]);
+            }
+    })
+    .catch(() =>{
+      this.authenticationError = true;
+    });
+   
   }
 
   register(){

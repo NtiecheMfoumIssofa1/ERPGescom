@@ -15,6 +15,7 @@ export class LoginService{
       const cb = callback || function(){};
 
       return new Promise((resolve,reject)=>{
+        console.log("LoginService"+ credentials);
           this.authServerProvider.login(credentials).subscribe(
               data => {
                   this.principal.identity(true).then(account =>{

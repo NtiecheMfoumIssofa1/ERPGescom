@@ -11,7 +11,7 @@ background-size: cover; ">
                     <a class="redirect" [routerLink]="['/sigup']">Register an account</a>
                 </mat-card-title>
                 <mat-card-content>
-                    <form *ngIf="userForm" fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="userForm"><!---->
+                    <form *ngIf="userForm" fxLayout="column" #f="ngForm" fxLayoutAlign="start stretch" [formGroup]="userForm" (ngSubmit)="login(f.value)"><!---->
                         <mat-form-field class="full-width">
                           <input type="email" id="email" class="input" placeholder="Please enter your email"
                                  formControlName="email" required matInput>
@@ -26,7 +26,11 @@ background-size: cover; ">
                         <div *ngIf="formErrors.password" class="help is-danger">
                             {{ formErrors.password }}
                         </div>
-                        <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid" (click)="login()">log in</button> <!---->
+                        <div>
+                            <mat-checkbox >remenberMe </mat-checkbox>
+                        </div>
+                        <br><br>
+                        <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">log in</button> <!---->
                     </form>
                 </mat-card-content>
             </mat-card>

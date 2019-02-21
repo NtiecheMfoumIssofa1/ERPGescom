@@ -1,5 +1,5 @@
 {
-  "name": "cdk-admin-v2",
+  "name": "ERPGescom",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -30,6 +30,7 @@
     "angular-nvd3": "^1.0.9",
     "angular-svg-round-progressbar": "^2.0.0",
     "angular2-chartjs": "^0.4.1",
+    "angular2-jwt": "^0.2.3",
     "angularfire2": "^5.0.0-rc.5-next",
     "chart.js": "^2.7.2",
     "core-js": "^2.5.7",
